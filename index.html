@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="全国大学生智能车竞赛开源资料、B 站视频与知识库导航。">
+    <title>智能车竞赛资料导航</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav-shell" aria-label="主导航">
+        <a class="brand" href="#/resources" aria-label="智能车竞赛资料导航首页">
+          <span class="brand-mark" aria-hidden="true">SC</span>
+          <span>
+            <strong>智能车竞赛资料导航</strong>
+            <small>Smart Car Race Open Resources</small>
+          </span>
+        </a>
+        <div class="nav-actions">
+          <a href="#/resources">资源</a>
+          <a href="#/docs/intro.md">知识库</a>
+          <a href="#/docs/data-model.md">数据模型</a>
+          <a href="#/docs/site-architecture.md">站点架构</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <p class="eyebrow">全国大学生智能车竞赛</p>
+            <h1 id="page-title">开源资料、视频与知识路径的一站式检索入口</h1>
+            <p class="lede">按年份、组别、类型、主题快速筛选资源，适合备赛、复盘和维护资料索引。纯静态文件即可部署到 GitHub Pages。</p>
+          </div>
+          <form class="search-panel" id="filters" role="search" aria-label="资源筛选">
+            <label class="search-field" for="keyword">
+              <span>关键词</span>
+              <input id="keyword" name="keyword" type="search" placeholder="搜索标题、简介、标签、作者" autocomplete="off">
+            </label>
+            <div class="filter-grid">
+              <label>
+                <span>年份</span>
+                <select id="year-filter" name="year">
+                  <option value="">全部年份</option>
+                </select>
+              </label>
+              <label>
+                <span>组别</span>
+                <select id="group-filter" name="group">
+                  <option value="">全部组别</option>
+                </select>
+              </label>
+              <label>
+                <span>类型</span>
+                <select id="type-filter" name="type">
+                  <option value="">全部类型</option>
+                </select>
+              </label>
+              <label>
+                <span>主题</span>
+                <select id="topic-filter" name="topic">
+                  <option value="">全部主题</option>
+                </select>
+              </label>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="content-shell" id="resources-view" aria-labelledby="resources-heading">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Resource Browser</p>
+            <h2 id="resources-heading">资源浏览器</h2>
+          </div>
+          <div class="result-meta" id="result-meta" aria-live="polite">正在加载资源...</div>
+        </div>
+        <div class="state-message" id="state-message" hidden></div>
+        <div class="resource-grid" id="resource-list"></div>
+      </section>
+
+      <section class="content-shell doc-view" id="doc-view" hidden aria-labelledby="doc-title">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Markdown Docs</p>
+            <h2 id="doc-title">文档</h2>
+          </div>
+          <a class="text-link" href="#/resources">返回资源</a>
+        </div>
+        <article class="markdown-body" id="doc-content"></article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>面向智能车竞赛社区的静态资料导航骨架。资源数据默认读取 <code>data/resources.json</code>，筛选枚举默认读取 <code>data/taxonomy.json</code>。</p>
+    </footer>
+
+    <script src="assets/js/app.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/taxonomy.schema.json",
+  "title": "SmartCarRace taxonomy",
+  "description": "筛选枚举字典结构，供资源校验脚本和前端筛选 UI 共用。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["years", "groups", "resourceTypes", "topics", "levels"],
+  "properties": {
+    "years": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9]{4}$"
+      }
+    },
+    "groups": {
+      "$ref": "#/$defs/options"
+    },
+    "resourceTypes": {
+      "$ref": "#/$defs/options"
+    },
+    "topics": {
+      "$ref": "#/$defs/options"
+    },
+    "levels": {
+      "$ref": "#/$defs/options"
+    }
+  },
+  "$defs": {
+    "options": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

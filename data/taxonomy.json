@@ -1,0 +1,111 @@
+{
+  "years": ["2024", "2025", "2026"],
+  "groups": [
+    {
+      "id": "camera",
+      "name": "摄像头组"
+    },
+    {
+      "id": "electromagnetic",
+      "name": "电磁组"
+    },
+    {
+      "id": "vision",
+      "name": "视觉组"
+    },
+    {
+      "id": "outdoor",
+      "name": "室外组"
+    },
+    {
+      "id": "ai",
+      "name": "人工智能组"
+    },
+    {
+      "id": "common",
+      "name": "通用资料"
+    }
+  ],
+  "resourceTypes": [
+    {
+      "id": "github",
+      "name": "开源仓库"
+    },
+    {
+      "id": "bilibili",
+      "name": "B 站视频"
+    },
+    {
+      "id": "article",
+      "name": "文章教程"
+    },
+    {
+      "id": "paper",
+      "name": "论文资料"
+    },
+    {
+      "id": "tool",
+      "name": "工具软件"
+    },
+    {
+      "id": "dataset",
+      "name": "数据集"
+    },
+    {
+      "id": "official",
+      "name": "官方资料"
+    }
+  ],
+  "topics": [
+    {
+      "id": "mechanical",
+      "name": "机械结构"
+    },
+    {
+      "id": "hardware",
+      "name": "硬件电路"
+    },
+    {
+      "id": "control",
+      "name": "控制算法"
+    },
+    {
+      "id": "vision",
+      "name": "机器视觉"
+    },
+    {
+      "id": "electromagnetic",
+      "name": "电磁导航"
+    },
+    {
+      "id": "embedded",
+      "name": "嵌入式开发"
+    },
+    {
+      "id": "simulation",
+      "name": "仿真调试"
+    },
+    {
+      "id": "rules",
+      "name": "竞赛规则"
+    },
+    {
+      "id": "case-study",
+      "name": "完赛经验"
+    }
+  ],
+  "levels": [
+    {
+      "id": "beginner",
+      "name": "入门"
+    },
+    {
+      "id": "intermediate",
+      "name": "进阶"
+    },
+    {
+      "id": "advanced",
+      "name": "高级"
+    }
+  ]
+}
