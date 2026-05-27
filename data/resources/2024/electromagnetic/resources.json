@@ -1,0 +1,22 @@
+[
+  {
+    "id": "2024-bilibili-electromagnetic-debug",
+    "title": "电磁组调车与传感器标定视频示例",
+    "url": "https://www.bilibili.com/video/BV1xx411c7mD/",
+    "year": "2024",
+    "groups": ["electromagnetic"],
+    "type": "bilibili",
+    "topics": ["electromagnetic", "hardware", "control"],
+    "level": "beginner",
+    "language": "zh-CN",
+    "description": "用于演示 B 站视频类资源的数据结构，内容聚焦电磁传感器布置、标定和调参思路。",
+    "source": {
+      "platform": "bilibili",
+      "author": "示例 UP 主"
+    },
+    "tags": ["电磁", "调参", "传感器"],
+    "featured": true,
+    "createdAt": "2026-05-27",
+    "updatedAt": "2026-05-27"
+  }
+]

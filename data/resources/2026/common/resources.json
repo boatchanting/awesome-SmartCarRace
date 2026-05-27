@@ -1,0 +1,22 @@
+[
+  {
+    "id": "2026-official-rules-common",
+    "title": "2026 年智能车竞赛规则与通知汇总",
+    "url": "https://smartcar.cdstm.cn/",
+    "year": "2026",
+    "groups": ["common"],
+    "type": "official",
+    "topics": ["rules"],
+    "level": "beginner",
+    "language": "zh-CN",
+    "description": "官方赛事信息入口示例，适合作为规则、通知和赛题资料的聚合来源。",
+    "source": {
+      "platform": "official",
+      "author": "全国大学生智能车竞赛"
+    },
+    "tags": ["官方", "规则", "通知"],
+    "featured": true,
+    "createdAt": "2026-05-27",
+    "updatedAt": "2026-05-27"
+  }
+]

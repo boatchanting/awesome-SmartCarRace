@@ -1,0 +1,22 @@
+[
+  {
+    "id": "2025-article-common-pid-intro",
+    "title": "智能车 PID 控制入门文章示例",
+    "url": "https://example.com/smartcar-pid-intro",
+    "year": "2025",
+    "groups": ["common", "camera", "electromagnetic"],
+    "type": "article",
+    "topics": ["control", "embedded"],
+    "level": "beginner",
+    "language": "zh-CN",
+    "description": "用于演示文章教程类资源的数据结构，适合作为控制算法筛选页的入门材料。",
+    "source": {
+      "platform": "website",
+      "author": "示例作者"
+    },
+    "tags": ["PID", "控制", "入门"],
+    "featured": false,
+    "createdAt": "2026-05-27",
+    "updatedAt": "2026-05-27"
+  }
+]

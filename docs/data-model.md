@@ -4,11 +4,41 @@
 
 ## 文件约定
 
-- `data/resources.json`：资源主数据，顶层为数组。
+- `data/resources.index.json`：资源分片索引。GitHub Pages 不能列目录，前端通过这个清单聚合加载各个分片。
+- `data/resources/{year}/{group}/resources.json`：资源分片数据，顶层为数组。示例：`data/resources/2025/camera/resources.json`。
 - `data/taxonomy.json`：筛选枚举，包括年份、组别、资料类型、主题和难度。
 - `schemas/resources.schema.json`：资源列表 JSON Schema，方便编辑器提示和后续接入 CI。
+- `schemas/resources-index.schema.json`：资源分片索引 JSON Schema。
 - `schemas/taxonomy.schema.json`：枚举字典 JSON Schema。
 - `scripts/validate-resources.js`：Node 校验脚本，不依赖第三方包。
+
+## 分片目录规范
+
+资源按两级目录拆分：
+
+```text
+data/resources/
+  2024/
+    electromagnetic/
+      resources.json
+  2025/
+    camera/
+      resources.json
+    common/
+      resources.json
+  2026/
+    common/
+      resources.json
+```
+
+约定：
+
+- 第一层目录是年份，必须存在于 `data/taxonomy.json` 的 `years`。
+- 第二层目录是组别 ID，必须存在于 `data/taxonomy.json` 的 `groups`。
+- `common` 表示跨组通用资料，`other` 表示暂时无法归入具体组别的资料。
+- 分片内每条资源的 `year` 必须与路径年份一致。
+- 分片内每条资源的 `groups` 必须包含路径组别。跨组资料可以放在 `common` 分片，同时在 `groups` 中额外写入相关组别。
+- 新增分片后必须把路径加入 `data/resources.index.json` 的 `files`。
 
 ## Resource 字段
 
@@ -52,12 +82,15 @@ node scripts/validate-resources.js
 
 当前脚本会检查：
 
-- `data/resources.json` 是否为数组。
+- `data/resources.index.json` 是否存在、是否列出了有效分片。
+- 分片路径是否符合 `data/resources/{year}/{group}/resources.json`。
+- 每个分片是否为数组，或包含 `resources` 数组。
 - 必填字段是否存在。
 - `id` 是否重复、格式是否正确。
 - `url` 是否为 `http/https`，以及是否重复。
 - `year` 是否为 4 位字符串，并存在于 `taxonomy.years`。
 - `groups`、`type`、`topics`、`level` 是否使用已定义枚举。
+- 资源 `year` 是否与分片年份一致，`groups` 是否包含分片组别。
 - 数组字段是否存在重复值。
 - `createdAt`、`updatedAt` 是否为 `YYYY-MM-DD` 格式。
 

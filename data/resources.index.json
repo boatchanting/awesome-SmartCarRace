@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "description": "资源分片索引。GitHub Pages 无法列目录，前端和校验脚本通过这里聚合各年份/组别下的 resources.json。",
+  "files": [
+    "data/resources/2024/electromagnetic/resources.json",
+    "data/resources/2025/camera/resources.json",
+    "data/resources/2025/common/resources.json",
+    "data/resources/2026/common/resources.json"
+  ]
+}

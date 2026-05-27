@@ -1,0 +1,22 @@
+[
+  {
+    "id": "2025-github-camera-baseline",
+    "title": "摄像头组基础代码仓库示例",
+    "url": "https://github.com/example/smartcar-camera-baseline",
+    "year": "2025",
+    "groups": ["camera"],
+    "type": "github",
+    "topics": ["embedded", "vision", "control"],
+    "level": "intermediate",
+    "language": "zh-CN",
+    "description": "用于演示 GitHub 开源仓库类资源的数据结构，覆盖图像采集、赛道识别和基础控制。",
+    "source": {
+      "platform": "github",
+      "author": "示例作者"
+    },
+    "tags": ["摄像头", "代码", "PID"],
+    "featured": false,
+    "createdAt": "2026-05-27",
+    "updatedAt": "2026-05-27"
+  }
+]

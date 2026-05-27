@@ -1,5 +1,6 @@
 (function () {
-  const DATA_URL = "data/resources.json";
+  const INDEX_URL = "data/resources.index.json";
+  const LEGACY_DATA_URL = "data/resources.json";
   const TAXONOMY_URL = "data/taxonomy.json";
 
   const state = {
@@ -40,6 +41,7 @@
     years: ["2024", "2025", "2026"],
     groups: [
       { id: "common", name: "通用资料" },
+      { id: "other", name: "其他" },
       { id: "camera", name: "摄像头组" },
       { id: "electromagnetic", name: "电磁组" },
       { id: "vision", name: "视觉组" }
@@ -246,21 +248,40 @@
     return response.json();
   }
 
+  async function loadResourcePayloads() {
+    try {
+      const index = await fetchJson(INDEX_URL);
+      const files = Array.isArray(index.files) ? index.files : [];
+      if (!files.length) {
+        return [];
+      }
+
+      const payloads = await Promise.all(files.map((file) => fetchJson(file)));
+      return payloads.flatMap((payload) => {
+        const list = Array.isArray(payload) ? payload : payload.resources;
+        return Array.isArray(list) ? list : [];
+      });
+    } catch (error) {
+      const payload = await fetchJson(LEGACY_DATA_URL);
+      const list = Array.isArray(payload) ? payload : payload.resources;
+      return Array.isArray(list) ? list : [];
+    }
+  }
+
   async function loadResources() {
     try {
-      const [rawTaxonomy, payload] = await Promise.all([
+      const [rawTaxonomy, list] = await Promise.all([
         fetchJson(TAXONOMY_URL).catch(() => fallbackTaxonomy),
-        fetchJson(DATA_URL)
+        loadResourcePayloads()
       ]);
-      const list = Array.isArray(payload) ? payload : payload.resources;
       state.taxonomy = { ...fallbackTaxonomy, ...rawTaxonomy };
-      state.resources = (Array.isArray(list) ? list : []).map(normalizeResource);
+      state.resources = list.map(normalizeResource);
       els.stateMessage.hidden = true;
     } catch (error) {
       state.taxonomy = fallbackTaxonomy;
       state.resources = [];
       els.stateMessage.hidden = false;
-      els.stateMessage.textContent = "未能读取 data/resources.json。通过本地静态服务器或 GitHub Pages 访问时，请确认数据文件存在且 JSON 格式正确。";
+      els.stateMessage.textContent = "未能读取资源分片。通过本地静态服务器或 GitHub Pages 访问时，请确认 data/resources.index.json 以及其中列出的 resources.json 存在且格式正确。";
     }
 
     hydrateFilters();

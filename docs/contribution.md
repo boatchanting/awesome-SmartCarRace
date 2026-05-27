@@ -13,6 +13,16 @@
 
 ## 资料条目建议格式
 
+资源导航页的数据优先维护在 `data/resources/{年份}/{组别}/resources.json`。例如：
+
+```text
+data/resources/2025/camera/resources.json
+data/resources/2025/common/resources.json
+data/resources/2025/other/resources.json
+```
+
+新增一个年份/组别分片时，还需要把路径加入 `data/resources.index.json`。否则静态站点不会自动加载这个文件。
+
 ```markdown
 ### 资源标题
 
@@ -31,10 +41,12 @@
 
 优先按以下顺序归类：
 
-1. 如果资料明确对应某一年比赛，放到 `docs/years/` 对应页面。
-2. 如果资料明确对应某个组别，放到 `docs/groups/` 对应页面。
-3. 如果资料是通用方法或教程，放到 `docs/knowledge/`。
-4. 如果资料横跨多个组别或年份，可在多个入口页互相链接，但正文只保留一份。
+1. 如果是资源链接，先放入 `data/resources/{年份}/{组别}/resources.json`。
+2. 如果资料明确对应某一年比赛，可在 `docs/years/` 对应页面补充背景说明。
+3. 如果资料明确对应某个组别，可在 `docs/groups/` 对应页面补充路线或经验。
+4. 如果资料是通用方法或教程，放到 `docs/knowledge/`。
+5. 如果资料横跨多个组别，优先放到 `common` 分片，并在 `groups` 字段里写入相关组别。
+6. 如果暂时无法归类到现有组别，放到 `other` 分片，并在 PR 中说明原因。
 
 ## 质量标准
 
@@ -59,9 +71,11 @@
 ## 推荐提交流程
 
 1. 新建分支。
-2. 按目录补充或修改 Markdown 文件。
-3. 本地检查链接、标题层级和表格格式。
-4. 提交 Pull Request，并说明新增资料类型、年份、组别和来源。
+2. 按年份和组别补充资源分片，必要时同步修改 Markdown 文件。
+3. 如果新增了分片路径，更新 `data/resources.index.json`。
+4. 执行 `node scripts/validate-resources.js`。
+5. 本地检查链接、标题层级和表格格式。
+6. 提交 Pull Request，并说明新增资料类型、年份、组别和来源。
 
 ## 维护者审核重点
 
@@ -70,4 +84,3 @@
 - 是否有足够元信息支持搜索和筛选。
 - 是否存在版权、隐私或不当传播风险。
 - 是否与已有资料重复。
-

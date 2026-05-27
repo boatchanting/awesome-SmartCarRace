@@ -2,7 +2,8 @@ const fs = require("fs");
 const path = require("path");
 
 const rootDir = path.resolve(__dirname, "..");
-const resourcesPath = path.join(rootDir, "data", "resources.json");
+const resourcesIndexPath = path.join(rootDir, "data", "resources.index.json");
+const legacyResourcesPath = path.join(rootDir, "data", "resources.json");
 const taxonomyPath = path.join(rootDir, "data", "taxonomy.json");
 
 const requiredFields = [
@@ -63,8 +64,21 @@ function validateUniqueArray(values, label, errors, location) {
   });
 }
 
-function validateResource(resource, index, taxonomy, trackers, errors) {
-  const location = `resources[${index}]`;
+function parseResourceShardPath(filePath) {
+  const normalized = filePath.replace(/\\/g, "/");
+  const match = normalized.match(/^data\/resources\/([0-9]{4})\/([a-z0-9-]+)\/resources\.json$/);
+  if (!match) {
+    return null;
+  }
+
+  return {
+    year: match[1],
+    group: match[2]
+  };
+}
+
+function validateResource(resource, index, context, taxonomy, trackers, errors) {
+  const location = `${context.file}:resources[${index}]`;
 
   if (!resource || typeof resource !== "object" || Array.isArray(resource)) {
     errors.push(`${location} 必须是对象`);
@@ -101,6 +115,8 @@ function validateResource(resource, index, taxonomy, trackers, errors) {
     errors.push(`${location}.year 必须是 4 位年份字符串，如 2026`);
   } else if (!taxonomy.years.has(resource.year)) {
     errors.push(`${location}.year 不在 taxonomy.years 中：${resource.year}`);
+  } else if (context.year && resource.year !== context.year) {
+    errors.push(`${location}.year 与分片年份不一致：资源为 ${resource.year}，路径为 ${context.year}`);
   }
 
   validateUniqueArray(resource.groups, "groups", errors, location);
@@ -110,6 +126,9 @@ function validateResource(resource, index, taxonomy, trackers, errors) {
         errors.push(`${location}.groups 包含未知组别：${group}`);
       }
     });
+    if (context.group && !resource.groups.includes(context.group)) {
+      errors.push(`${location}.groups 必须包含所在分片组别：${context.group}`);
+    }
   }
 
   if (typeof resource.type !== "string" || !taxonomy.resourceTypes.has(resource.type)) {
@@ -155,14 +174,60 @@ function validateResource(resource, index, taxonomy, trackers, errors) {
   });
 }
 
+function readResourceFiles(errors) {
+  if (fs.existsSync(resourcesIndexPath)) {
+    const index = readJson(resourcesIndexPath);
+    if (!Array.isArray(index.files)) {
+      errors.push("data/resources.index.json 的 files 必须是数组");
+      return [];
+    }
+
+    const seenFiles = new Set();
+    return index.files.map((file) => {
+      if (seenFiles.has(file)) {
+        errors.push(`data/resources.index.json 包含重复分片：${file}`);
+      }
+      seenFiles.add(file);
+
+      const shard = parseResourceShardPath(file);
+      if (!shard) {
+        errors.push(`资源分片路径不符合 data/resources/{year}/{group}/resources.json：${file}`);
+      }
+
+      const absolutePath = path.join(rootDir, file);
+      if (!fs.existsSync(absolutePath)) {
+        errors.push(`资源分片不存在：${file}`);
+        return { file, resources: [], ...shard };
+      }
+
+      const payload = readJson(absolutePath);
+      const resources = Array.isArray(payload) ? payload : payload.resources;
+      if (!Array.isArray(resources)) {
+        errors.push(`${file} 顶层必须是数组，或包含 resources 数组`);
+        return { file, resources: [], ...shard };
+      }
+
+      return { file, resources, ...shard };
+    });
+  }
+
+  if (fs.existsSync(legacyResourcesPath)) {
+    const resources = readJson(legacyResourcesPath);
+    if (!Array.isArray(resources)) {
+      errors.push("data/resources.json 顶层必须是数组");
+      return [];
+    }
+    return [{ file: "data/resources.json", resources }];
+  }
+
+  errors.push("未找到 data/resources.index.json 或 data/resources.json");
+  return [];
+}
+
 function main() {
-  const resources = readJson(resourcesPath);
   const rawTaxonomy = readJson(taxonomyPath);
   const errors = [];
-
-  if (!Array.isArray(resources)) {
-    errors.push("data/resources.json 顶层必须是数组");
-  }
+  const shards = readResourceFiles(errors);
 
   const taxonomy = {
     years: new Set(rawTaxonomy.years || []),
@@ -172,16 +237,25 @@ function main() {
     levels: optionIds(rawTaxonomy.levels || [])
   };
 
-  if (Array.isArray(resources)) {
-    const trackers = {
-      ids: new Set(),
-      urls: new Set()
-    };
+  const trackers = {
+    ids: new Set(),
+    urls: new Set()
+  };
 
-    resources.forEach((resource, index) => {
-      validateResource(resource, index, taxonomy, trackers, errors);
+  let total = 0;
+  shards.forEach((shard) => {
+    if (shard.year && !taxonomy.years.has(shard.year)) {
+      errors.push(`${shard.file} 路径年份不在 taxonomy.years 中：${shard.year}`);
+    }
+    if (shard.group && !taxonomy.groups.has(shard.group)) {
+      errors.push(`${shard.file} 路径组别不在 taxonomy.groups 中：${shard.group}`);
+    }
+
+    shard.resources.forEach((resource, index) => {
+      validateResource(resource, index, shard, taxonomy, trackers, errors);
+      total += 1;
     });
-  }
+  });
 
   if (errors.length > 0) {
     console.error("资源数据校验失败：");
@@ -189,7 +263,7 @@ function main() {
     process.exit(1);
   }
 
-  console.log(`资源数据校验通过：${resources.length} 条资源。`);
+  console.log(`资源数据校验通过：${total} 条资源，${shards.length} 个分片。`);
 }
 
 main();

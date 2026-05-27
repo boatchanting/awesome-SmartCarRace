@@ -24,6 +24,10 @@
     {
       "id": "common",
       "name": "通用资料"
+    },
+    {
+      "id": "other",
+      "name": "其他"
     }
   ],
   "resourceTypes": [

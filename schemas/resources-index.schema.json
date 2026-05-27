@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/resources-index.schema.json",
+  "title": "SmartCarRace resources index",
+  "description": "资源分片索引，用于在 GitHub Pages 静态站点中聚合加载各年份/组别的 resources.json。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "files"],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "files": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^data/resources/[0-9]{4}/[a-z0-9-]+/resources\\.json$"
+      }
+    }
+  }
+}

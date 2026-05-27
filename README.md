@@ -37,6 +37,15 @@
 ## 内容组织
 
 ```text
+data/
+  taxonomy.json            年份、组别、类型、主题等筛选枚举
+  resources.index.json     资源分片索引，供前端聚合加载
+  resources/
+    2025/
+      camera/
+        resources.json     2025 年摄像头组资源
+      common/
+        resources.json     2025 年通用资料
 docs/
   intro.md                 项目介绍与使用方式
   contribution.md          贡献说明与资料提交规范
@@ -47,6 +56,8 @@ docs/
 ```
 
 每条资源建议保留这些字段：标题、链接、类型、年份、组别、关键词、简介、推荐理由、维护状态、授权说明。
+
+资源数据按 `data/resources/{年份}/{组别}/resources.json` 拆分维护。新增分片后，需要把文件路径加入 `data/resources.index.json`，否则 GitHub Pages 前端无法自动发现该文件。
 
 ## 后续网站能力
 
@@ -63,4 +74,3 @@ docs/
 欢迎提交资料链接、修正文档、补充组别页面、整理年份页面或增加知识文章。提交前请先阅读 [贡献说明](docs/contribution.md)。
 
 如果你不确定资料应该放在哪里，可以先在 Issue 中说明：资料链接、对应年份、对应组别、你认为它有价值的原因。
-
