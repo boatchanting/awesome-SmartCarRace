@@ -1,0 +1,23 @@
+[
+  {
+    "id": "2025-balance-wheel-leg-csdn-single-bridge",
+    "title": "平衡轮腿组之可达鸭思路浅析：单边桥控制",
+    "url": "https://blog.csdn.net/zhuoqingjoking97298/article/details/146122467",
+    "year": "2025",
+    "groups": ["balance-wheel-leg"],
+    "type": "csdn",
+    "topics": ["control", "mechanical", "case-study"],
+    "level": "intermediate",
+    "language": "zh-CN",
+    "description": "面向智能车平衡轮腿组的单边桥控制思路文章，适合整理轮腿姿态、过桥动作和控制策略时参考。",
+    "source": {
+      "platform": "csdn",
+      "author": "可达鸭"
+    },
+    "tags": ["平衡轮腿", "单边桥", "控制策略", "第20届"],
+    "featured": true,
+    "createdAt": "2026-05-27",
+    "updatedAt": "2026-05-27"
+  }
+  
+]

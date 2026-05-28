@@ -22,6 +22,10 @@
       "name": "人工智能组"
     },
     {
+      "id": "balance-wheel-leg",
+      "name": "平衡轮腿组"
+    },
+    {
       "id": "common",
       "name": "通用资料"
     },
@@ -36,8 +40,24 @@
       "name": "开源仓库"
     },
     {
+      "id": "gitee",
+      "name": "Gitee 仓库"
+    },
+    {
+      "id": "csdn",
+      "name": "CSDN 资料"
+    },
+    {
       "id": "bilibili",
       "name": "B 站视频"
+    },
+    {
+      "id": "wechat",
+      "name": "微信推文"
+    },
+    {
+      "id": "open-hardware",
+      "name": "开源硬件"
     },
     {
       "id": "article",

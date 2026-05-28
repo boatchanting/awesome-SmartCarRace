@@ -6,7 +6,7 @@
 
 - [摄像头组](camera.md)
 - [电磁组](electromagnetic.md)
-- [平衡组](balance.md)
+- [平衡轮腿组](balance.md)
 - [AI 视觉组](ai-vision.md)
 
 ## 页面结构建议
@@ -25,4 +25,3 @@
 ## 资料归类建议
 
 如果一个资料同时适用于多个组别，可以在多个组别页面放短链接，但不要重复写长说明。通用知识应抽取到 [知识库](../knowledge/index.md)。
-
