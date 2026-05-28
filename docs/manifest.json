@@ -1,0 +1,26 @@
+{
+  "generatedAt": "2026-05-28T13:44:57.206Z",
+  "root": "docs",
+  "files": [
+    "docs/commit-message.md",
+    "docs/contribution.md",
+    "docs/data-model.md",
+    "docs/groups/2025/平衡轮腿.md",
+    "docs/groups/2025/ai-vision.md",
+    "docs/groups/2025/camera.md",
+    "docs/groups/2025/electromagnetic.md",
+    "docs/groups/2025/index.md",
+    "docs/intro.md",
+    "docs/knowledge/getting-started.md",
+    "docs/knowledge/hardware/sensors.md",
+    "docs/knowledge/index.md",
+    "docs/knowledge/software/control-and-path.md",
+    "docs/knowledge/tools/debugging.md",
+    "docs/roadmaps/collection-roadmap.md",
+    "docs/roadmaps/information-architecture.md",
+    "docs/site-architecture.md",
+    "docs/years/2023.md",
+    "docs/years/2024.md",
+    "docs/years/index.md"
+  ]
+}
