@@ -6,7 +6,7 @@
 
 - [摄像头组](camera.md)
 - [电磁组](electromagnetic.md)
-- [平衡轮腿组](balance.md)
+- [平衡轮腿组](平衡轮腿.md)
 - [AI 视觉组](ai-vision.md)
 
 ## 页面结构建议
