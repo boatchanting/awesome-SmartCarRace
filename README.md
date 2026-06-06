@@ -1,10 +1,10 @@
 <div align="center">
 
-<img src="docs/logo.png" alt="Awesome SmartCar Race Logo" width="180">
-
 # 全国大学生智能车竞赛开源资料导航
 
 ### Awesome SmartCar Race Resources & Knowledge Base
+
+<img src="docs/logo.png" alt="Awesome SmartCar Race Logo" width="180">
 
 面向 **全国大学生智能车竞赛（SmartCar Race）** 的开源资料导航与长期维护知识库，持续收集历届竞赛资料、开源项目、视频教程、技术报告、经验分享与组别知识。
 
