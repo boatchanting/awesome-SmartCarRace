@@ -1060,3 +1060,357 @@ mark { border-radius: 4px; background: color-mix(in srgb, var(--warning) 28%, tr
   background: transparent;
   padding: 0;
 }
+
+/* Mobile refinement for home, knowledge base and resources pages. */
+@media (max-width: 860px) {
+  .nav-shell {
+    align-items: center;
+    gap: 10px;
+  }
+
+  .brand {
+    min-width: 0;
+    max-width: calc(100% - 58px);
+  }
+
+  .brand > span:last-child {
+    min-width: 0;
+  }
+
+  .brand strong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .nav-actions {
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+  }
+
+  .nav-actions::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-actions a,
+  .nav-actions button {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
+
+  .home-view {
+    gap: 24px;
+  }
+
+  .docs-hero,
+  .resource-hero {
+    gap: 20px;
+  }
+
+  .hero-card,
+  .search-panel,
+  .resource-toolbar,
+  .resource-builder,
+  .doc-article {
+    box-shadow: 0 14px 36px rgba(15, 23, 42, 0.08);
+  }
+
+  .resource-hero {
+    align-items: stretch;
+  }
+
+  .resource-form .checkbox-field {
+    align-self: stretch;
+  }
+
+  .latest-resource,
+  .update-item {
+    align-items: flex-start;
+  }
+
+  .doc-actions {
+    justify-content: flex-start;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+  }
+
+  .doc-actions::-webkit-scrollbar {
+    display: none;
+  }
+
+  .doc-actions .text-link {
+    flex: 0 0 auto;
+  }
+
+  .doc-sidebar::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: rgba(2, 6, 23, 0.18);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.22s ease;
+  }
+
+  .doc-sidebar.open::after {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 560px) {
+  .app-shell,
+  body[data-view="home"] .app-shell,
+  body[data-view="resources"] .app-shell {
+    width: min(100% - 20px, 760px);
+    padding-top: 14px;
+    padding-bottom: 44px;
+  }
+
+  .nav-shell {
+    width: min(100% - 20px, 1440px);
+  }
+
+  .brand-mark {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+  }
+
+  .brand strong {
+    font-size: 15px;
+  }
+
+  .nav-actions {
+    gap: 4px;
+  }
+
+  .nav-actions a,
+  .nav-actions button,
+  .text-link,
+  .mobile-menu,
+  .sidebar-head button {
+    padding: 8px 9px;
+  }
+
+  .docs-hero,
+  .resource-hero,
+  .resource-builder,
+  .doc-header,
+  .markdown-body {
+    border-radius: 18px;
+  }
+
+  .docs-hero {
+    padding: 22px 18px;
+  }
+
+  .resource-hero {
+    margin-bottom: 14px;
+  }
+
+  .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .hero-actions .btn,
+  .resource-submit .btn,
+  .resource-builder-actions .btn {
+    width: 100%;
+  }
+
+  .hero-card {
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .hero-stat strong,
+  .stat strong {
+    font-size: 24px;
+  }
+
+  .portal-signal,
+  .stat,
+  .update-item {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .home-view {
+    gap: 20px;
+  }
+
+  .home-section {
+    min-width: 0;
+  }
+
+  .section-head {
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .quick-card,
+  .group-card,
+  .resource-pick,
+  .contribution-card,
+  .eco-card,
+  .readme-card,
+  .knowledge-branch {
+    min-height: auto;
+    padding: 16px;
+  }
+
+  .year-timeline {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(132px, 68vw);
+    grid-template-columns: none;
+    margin-inline: -10px;
+    padding: 0 10px 6px;
+    scroll-snap-type: x proximity;
+  }
+
+  .year-node {
+    min-width: 0;
+    scroll-snap-align: start;
+  }
+
+  .latest-resource {
+    padding: 12px;
+  }
+
+  .resource-toolbar {
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .view-toggle {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .page-size-control {
+    align-items: center;
+  }
+
+  .resource-card {
+    padding: 16px;
+  }
+
+  .resource-grid[data-view="detail"] .resource-detail-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .card-actions a {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .doc-topbar {
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .breadcrumbs {
+    gap: 6px;
+    font-size: 12px;
+  }
+
+  .doc-actions {
+    margin-inline: -10px;
+    padding-inline: 10px;
+  }
+
+  .doc-header h1 {
+    font-size: clamp(28px, 8.5vw, 34px);
+  }
+
+  .doc-summary,
+  .lede {
+    font-size: 15.5px;
+  }
+
+  .markdown-body {
+    font-size: 15.5px;
+    overflow-wrap: anywhere;
+  }
+
+  .markdown-body h1,
+  .markdown-body h2,
+  .markdown-body h3,
+  .markdown-body h4 {
+    scroll-margin-top: calc(var(--header-height) + 14px);
+  }
+
+  .markdown-body blockquote {
+    padding: 12px 14px;
+  }
+
+  .markdown-body table,
+  .mermaid,
+  .code-block {
+    margin-inline: -2px;
+  }
+
+  .search-dialog {
+    width: calc(100% - 20px);
+    border-radius: 18px;
+  }
+
+  .search-input-wrap {
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .search-input-wrap input {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .nav-actions a,
+  .nav-actions button {
+    font-size: 13px;
+  }
+
+  .mobile-menu span,
+  .search-trigger span,
+  .theme-toggle span {
+    display: none;
+  }
+
+  h1 {
+    font-size: 29px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  .docs-hero,
+  .resource-hero,
+  .resource-builder,
+  .doc-header,
+  .markdown-body {
+    padding: 16px;
+  }
+
+  .line-numbers {
+    display: none;
+  }
+
+  .code-block {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 860px) {
+  body[data-view="doc"].sidebar-collapsed .mobile-menu {
+    display: inline-flex;
+  }
+}
