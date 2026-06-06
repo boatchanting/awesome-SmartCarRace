@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="docs/logo.png" alt="Awesome SmartCar Race Logo" width="180">
+
 # 全国大学生智能车竞赛开源资料导航
 
 ### Awesome SmartCar Race Resources & Knowledge Base
