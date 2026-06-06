@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css" media="(prefers-color-scheme: dark)">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css" media="(prefers-color-scheme: light)">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css">
-    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="stylesheet" href="style.css?v=5">
   </head>
   <body data-theme="auto" data-view="home">
     <div class="read-progress" id="read-progress" aria-hidden="true"></div>
@@ -67,20 +67,117 @@
         <section class="home-view" id="home-view" hidden>
           <div class="hero docs-hero">
             <div class="hero-copy">
-              <p class="eyebrow">Markdown Knowledge Base</p>
-              <h1>面向智能车竞赛的现代文档站点系统</h1>
-              <p class="lede">自动扫描 docs 目录，生成文件树、全文搜索、阅读统计、Mermaid、数学公式、代码复制与响应式阅读体验。</p>
+              <p class="eyebrow">Smart Car Race Portal</p>
+              <h1>全国大学生智能车竞赛资料门户</h1>
+              <p class="lede">汇集历届规则、组别经验、开源项目、视频教程和技术知识库，帮助队伍从入门、选型、调试到比赛复盘更快找到可靠资料。</p>
               <div class="hero-actions">
-                <a class="btn primary" href="#/docs/intro.md">开始阅读</a>
-                <button class="btn ghost" type="button" data-open-search>全文搜索</button>
+                <a class="btn primary" href="#/docs/knowledge/getting-started.md">开始学习</a>
+                <a class="btn ghost" href="#/resources">浏览资源</a>
+                <a class="btn ghost" href="https://github.com/boatchanting/awosome-SmartCarRace" target="_blank" rel="noreferrer"><i class="fa-brands fa-github"></i>GitHub 仓库</a>
               </div>
             </div>
             <div class="hero-card" id="site-stats">
-              <p>正在统计文档...</p>
+              <p>正在统计资料...</p>
             </div>
           </div>
 
-          <div class="feature-grid" id="feature-grid"></div>
+          <section class="home-section quick-start-section">
+            <div class="section-head">
+              <div>
+                <p class="eyebrow">Start Here</p>
+                <h2>第一次参加智能车竞赛？</h2>
+              </div>
+              <a class="text-link" href="#/docs/knowledge/getting-started.md">查看入门指南</a>
+            </div>
+            <div class="learning-path" id="learning-path"></div>
+            <div class="quick-grid" id="quick-start-grid"></div>
+          </section>
+
+          <section class="home-section">
+            <div class="section-head">
+              <div>
+                <p class="eyebrow">Groups</p>
+                <h2>竞赛组别导航</h2>
+              </div>
+              <a class="text-link" href="#/docs/groups/2025/index.md">查看全部组别</a>
+            </div>
+            <div class="group-grid" id="group-grid"></div>
+          </section>
+
+          <section class="home-section">
+            <div class="section-head">
+              <div>
+                <p class="eyebrow">Timeline</p>
+                <h2>历届竞赛导航</h2>
+              </div>
+              <a class="text-link" href="#/docs/years/index.md">年份索引</a>
+            </div>
+            <div class="year-timeline" id="year-timeline"></div>
+          </section>
+
+          <section class="home-section">
+            <div class="section-head">
+              <div>
+                <p class="eyebrow">Featured</p>
+                <h2>热门资源推荐</h2>
+              </div>
+              <a class="text-link" href="#/resources">进入资源浏览器</a>
+            </div>
+            <div class="resource-recommendations" id="hot-resources"></div>
+          </section>
+
+          <section class="home-section split-section">
+            <div>
+              <div class="section-head">
+                <div>
+                  <p class="eyebrow">New Resources</p>
+                  <h2>最新收录</h2>
+                </div>
+              </div>
+              <div class="latest-resource-list" id="latest-resources"></div>
+            </div>
+            <div>
+              <div class="section-head">
+                <div>
+                  <p class="eyebrow">Knowledge Map</p>
+                  <h2>知识体系导航</h2>
+                </div>
+              </div>
+              <div class="knowledge-map" id="knowledge-map"></div>
+            </div>
+          </section>
+
+          <section class="home-section">
+            <div class="section-head">
+              <div>
+                <p class="eyebrow">Open Source Ecosystem</p>
+                <h2>智能车开源生态</h2>
+              </div>
+              <button class="text-link" type="button" data-open-search><i class="fa-solid fa-magnifying-glass"></i>搜索资料</button>
+            </div>
+            <div class="ecosystem-grid" id="ecosystem-stats"></div>
+          </section>
+
+          <section class="home-section split-section">
+            <div>
+              <div class="section-head">
+                <div>
+                  <p class="eyebrow">Community</p>
+                  <h2>社区贡献</h2>
+                </div>
+              </div>
+              <div class="contribution-grid" id="contribution-grid"></div>
+            </div>
+            <div>
+              <div class="section-head">
+                <div>
+                  <p class="eyebrow">About</p>
+                  <h2>项目简介</h2>
+                </div>
+              </div>
+              <div class="readme-preview" id="readme-preview">正在同步 README...</div>
+            </div>
+          </section>
 
           <section class="home-section">
             <div class="section-head">
@@ -91,17 +188,6 @@
               <a class="text-link" href="#/docs/knowledge/index.md">浏览知识库</a>
             </div>
             <div class="update-list" id="recent-updates"></div>
-          </section>
-
-          <section class="home-section readme-section">
-            <div class="section-head">
-              <div>
-                <p class="eyebrow">README Sync</p>
-                <h2>README 自动同步</h2>
-              </div>
-              <a class="text-link" href="README.md" target="_blank" rel="noreferrer">查看原文</a>
-            </div>
-            <div class="markdown-body readme-preview" id="readme-preview">正在同步 README...</div>
           </section>
         </section>
 
@@ -263,6 +349,6 @@
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"></script>
-    <script src="main.js?v=4" defer></script>
+    <script src="main.js?v=5" defer></script>
   </body>
 </html>

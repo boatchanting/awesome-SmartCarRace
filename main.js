@@ -117,6 +117,15 @@
     recentUpdates: $("#recent-updates"),
     readmePreview: $("#readme-preview"),
     featureGrid: $("#feature-grid"),
+    quickStartGrid: $("#quick-start-grid"),
+    learningPath: $("#learning-path"),
+    groupGrid: $("#group-grid"),
+    yearTimeline: $("#year-timeline"),
+    hotResources: $("#hot-resources"),
+    latestResources: $("#latest-resources"),
+    knowledgeMap: $("#knowledge-map"),
+    ecosystemStats: $("#ecosystem-stats"),
+    contributionGrid: $("#contribution-grid"),
     searchDialog: $("#search-dialog"),
     searchInput: $("#doc-search"),
     searchResults: $("#search-results"),
@@ -483,26 +492,171 @@
       .filter(Boolean)
       .sort()
       .pop() || "以文件为准";
+    const resourceYears = new Set(state.resources.map((item) => item.year).filter(Boolean));
+    const resourceTypeCount = (types) => state.resources.filter((item) => types.includes(item.type)).length;
+    const groupCount = (...ids) => state.resources.filter((item) => ids.some((id) => item.groups.includes(id))).length;
+    const typeIcon = (type) => ({
+      github: "fa-brands fa-github",
+      gitee: "fa-solid fa-code-branch",
+      bilibili: "fa-solid fa-play",
+      csdn: "fa-solid fa-newspaper",
+      article: "fa-solid fa-newspaper",
+      wechat: "fa-brands fa-weixin",
+      paper: "fa-solid fa-file-lines",
+      official: "fa-solid fa-building-columns"
+    })[type] || "fa-solid fa-link";
+
     els.siteStats.innerHTML = `
-      <div class="stat"><strong>${state.docs.length}</strong><span>文档数量</span></div>
-      <div class="stat"><strong>${totalWords.toLocaleString("zh-CN")}</strong><span>总字数</span></div>
-      <div class="stat"><strong>${escapeHtml(formatDate(lastUpdated))}</strong><span>最后更新</span></div>
-      <a class="btn primary full" href="https://github.com/${config.githubRepo}" target="_blank" rel="noreferrer"><i class="fa-brands fa-github"></i> GitHub 仓库</a>
+      <div class="hero-stat-grid">
+        <div class="hero-stat"><strong>${state.resources.length}</strong><span>收录资源</span></div>
+        <div class="hero-stat"><strong>${resourceTypeCount(["github"])}</strong><span>GitHub 项目</span></div>
+        <div class="hero-stat"><strong>${resourceTypeCount(["bilibili"])}</strong><span>视频教程</span></div>
+        <div class="hero-stat"><strong>${resourceTypeCount(["article", "csdn", "wechat", "paper"])}</strong><span>技术文章</span></div>
+        <div class="hero-stat"><strong>${resourceYears.size}</strong><span>覆盖年份</span></div>
+        <div class="hero-stat"><strong>${state.docs.length}</strong><span>知识文档</span></div>
+      </div>
+      <div class="portal-signal">
+        <span>最近更新</span>
+        <strong>${escapeHtml(formatDate(lastUpdated))}</strong>
+      </div>
     `;
 
-    const features = [
-      ["自动文档树", "扫描 docs/manifest.json 或 GitHub tree，支持多级目录与上一篇/下一篇。", "fa-sitemap"],
-      ["增强 Markdown", "GFM、代码高亮、Mermaid、KaTeX、脚注、任务列表与图片预览。", "fa-wand-magic-sparkles"],
-      ["本地全文搜索", "Fuse.js 自动索引标题、正文、标签、分类，并支持 Ctrl + K 快捷键。", "fa-magnifying-glass-chart"],
-      ["阅读体验", "深浅色主题、阅读进度、TOC 高亮、毛玻璃侧栏与移动端适配。", "fa-book-open-reader"]
+    const learningPath = ["新手入门", "组别介绍", "硬件搭建", "控制算法", "调试与测试", "比赛经验"];
+    els.learningPath.innerHTML = learningPath.map((step, index) => `
+      <span>${index + 1}. ${step}</span>
+    `).join("");
+
+    const quickCards = [
+      ["了解竞赛", "先弄清赛制、资料范围和备赛节奏。", "docs/intro.md", "fa-flag-checkered"],
+      ["选择组别", "比较摄像头、电磁、轮腿与 AI 视觉路线。", "docs/groups/2025/index.md", "fa-layer-group"],
+      ["硬件选型", "梳理传感器、电机、电源和调试工具。", "docs/knowledge/hardware/sensors.md", "fa-microchip"],
+      ["软件框架", "从控制与路径规划开始搭建代码骨架。", "docs/knowledge/software/control-and-path.md", "fa-code"],
+      ["调试流程", "建立可复现的测试、日志与调参方法。", "docs/knowledge/tools/debugging.md", "fa-screwdriver-wrench"],
+      ["国赛经验", "从完赛复盘、报告和开源方案中找路线。", "docs/years/index.md", "fa-trophy"]
     ];
-    els.featureGrid.innerHTML = features.map(([title, text, icon]) => `
-      <article class="feature-card"><i class="fa-solid ${icon}"></i><h3>${title}</h3><p>${text}</p></article>
+    els.quickStartGrid.innerHTML = quickCards.map(([title, text, path, icon]) => `
+      <a class="portal-card quick-card" href="${buildDocHash(path)}">
+        <i class="fa-solid ${icon}"></i>
+        <strong>${title}</strong>
+        <span>${text}</span>
+      </a>
+    `).join("");
+
+    const groups = [
+      { id: "camera", title: "摄像头组", text: "围绕图像采集、赛道识别、路径跟踪与高速稳定控制。", path: "docs/groups/2025/camera.md", icon: "fa-camera" },
+      { id: "electromagnetic", title: "电磁组", text: "关注电感阵列、电磁导航、抗干扰处理和实时控制。", path: "docs/groups/2025/electromagnetic.md", icon: "fa-wave-square" },
+      { id: "balance-wheel-leg", title: "平衡轮腿组", text: "覆盖轮腿机构、姿态控制、VMC/LQR 和复杂动作调试。", path: "docs/groups/2025/平衡轮腿.md", icon: "fa-car-side" },
+      { id: "ai", title: "AI 视觉组", text: "面向 OpenMV/OpenART、模型部署、目标识别与视觉决策。", path: "docs/groups/2025/ai-vision.md", icon: "fa-brain", aliases: ["vision"] }
+    ];
+    els.groupGrid.innerHTML = groups.map((group) => {
+      const count = groupCount(group.id, ...(group.aliases || []));
+      return `
+        <a class="portal-card group-card" href="${buildDocHash(group.path)}">
+          <i class="fa-solid ${group.icon}"></i>
+          <span class="card-count">${count} 条资料</span>
+          <h3>${group.title}</h3>
+          <p>${group.text}</p>
+        </a>
+      `;
+    }).join("");
+
+    const yearNotes = {
+      "2020": "规则沉淀与基础方案复盘",
+      "2021": "摄像头与电磁路线持续成熟",
+      "2022": "视觉、控制与调试工程化加强",
+      "2023": "赛题变化与组别资料整理",
+      "2024": "开源资料和复盘内容增多",
+      "2025": "平衡轮腿与多组别方案集中收录",
+      "2026": "新赛季资料持续补充"
+    };
+    els.yearTimeline.innerHTML = ["2020", "2021", "2022", "2023", "2024", "2025", "2026"].map((year) => {
+      const count = state.resources.filter((item) => item.year === year).length;
+      const path = state.docsByPath.has(`docs/years/${year}.md`) ? buildDocHash(`docs/years/${year}.md`) : "#/resources";
+      return `
+        <a class="year-node" href="${path}">
+          <strong>${year}</strong>
+          <span>${escapeHtml(yearNotes[year])}</span>
+          <small>${count} 条热门资料</small>
+        </a>
+      `;
+    }).join("");
+
+    const recommendationReason = (item) => {
+      if (item.featured) return "精选资料，适合作为该方向的优先入口。";
+      if (item.type === "github" || item.type === "gitee") return "开源代码资料，适合参考工程结构和实现细节。";
+      if (item.type === "bilibili") return "视频教程资料，适合快速理解调试流程。";
+      return "技术资料，适合补充方案设计和复盘依据。";
+    };
+    const hotResources = [...state.resources]
+      .sort((a, b) => Number(b.featured) - Number(a.featured) || getSearchText(b).length - getSearchText(a).length)
+      .slice(0, 4);
+    els.hotResources.innerHTML = hotResources.map((item) => `
+      <a class="portal-card resource-pick" href="${escapeHtml(buildResourceHref(item))}" ${item.url && !isInternalDoc(item.url) ? "target=\"_blank\" rel=\"noreferrer\"" : ""}>
+        <div class="card-topline">
+          <span><i class="${typeIcon(item.type)}"></i> ${escapeHtml(labelFor("resourceTypes", item.type) || item.type || "资源")}</span>
+          ${item.featured ? `<span class="pill featured">精选</span>` : ""}
+        </div>
+        <h3>${escapeHtml(item.title)}</h3>
+        <p>${escapeHtml(recommendationReason(item))}</p>
+        <div class="tag-list">${renderPills(item.topics.slice(0, 2), "topics")}${item.tags.slice(0, 2).map((tag) => `<span class="tag">#${escapeHtml(tag)}</span>`).join("")}</div>
+      </a>
+    `).join("");
+
+    els.latestResources.innerHTML = [...state.resources]
+      .sort((a, b) => String(b.updatedAt || b.createdAt || "").localeCompare(String(a.updatedAt || a.createdAt || "")))
+      .slice(0, 6)
+      .map((item) => `
+        <a class="latest-resource" href="${escapeHtml(buildResourceHref(item))}" ${item.url && !isInternalDoc(item.url) ? "target=\"_blank\" rel=\"noreferrer\"" : ""}>
+          <i class="${typeIcon(item.type)}"></i>
+          <span><strong>${escapeHtml(item.title)}</strong><small>${escapeHtml([labelFor("resourceTypes", item.type), item.year].filter(Boolean).join(" · "))}</small></span>
+        </a>
+      `).join("");
+
+    const knowledgeMap = [
+      ["硬件", [["传感器", "docs/knowledge/hardware/sensors.md"], ["电机", "docs/knowledge/hardware/sensors.md"], ["电源", "docs/knowledge/hardware/sensors.md"]]],
+      ["软件", [["PID", "docs/knowledge/software/control-and-path.md"], ["LQR", "docs/knowledge/software/control-and-path.md"], ["MPC", "docs/knowledge/software/control-and-path.md"], ["VMC", "docs/knowledge/software/control-and-path.md"]]],
+      ["导航", [["电磁", "docs/groups/2025/electromagnetic.md"], ["摄像头", "docs/groups/2025/camera.md"], ["GPS", "docs/knowledge/index.md"], ["惯导", "docs/knowledge/index.md"]]],
+      ["视觉", [["OpenMV", "docs/groups/2025/ai-vision.md"], ["OpenART", "docs/groups/2025/ai-vision.md"], ["AI视觉", "docs/groups/2025/ai-vision.md"]]]
+    ];
+    els.knowledgeMap.innerHTML = knowledgeMap.map(([title, links]) => `
+      <article class="knowledge-branch">
+        <h3>${title}</h3>
+        ${links.map(([label, path]) => `<a href="${buildDocHash(path)}">${label}</a>`).join("")}
+      </article>
+    `).join("");
+
+    const ecosystem = [
+      ["GitHub 仓库", resourceTypeCount(["github"]), "fa-brands fa-github"],
+      ["Gitee 仓库", resourceTypeCount(["gitee"]), "fa-solid fa-code-branch"],
+      ["视频资源", resourceTypeCount(["bilibili"]), "fa-solid fa-play"],
+      ["技术文章", resourceTypeCount(["article", "csdn", "wechat", "paper"]), "fa-solid fa-newspaper"]
+    ];
+    const maxEco = Math.max(1, ...ecosystem.map(([, value]) => value));
+    els.ecosystemStats.innerHTML = ecosystem.map(([label, value, icon]) => `
+      <article class="eco-card">
+        <div><i class="${icon}"></i><span>${label}</span></div>
+        <strong>${value}</strong>
+        <span class="eco-bar"><span style="width:${Math.max(8, Math.round((value / maxEco) * 100))}%"></span></span>
+      </article>
+    `).join("");
+
+    const contributions = [
+      ["贡献资料", "提交新的开源项目、视频、文章和报告。", "#/resources", "fa-link"],
+      ["提交资源", "使用资源页表单先录入，再导出 JSON 合并。", "#/resources", "fa-file-circle-plus"],
+      ["完善知识库", "补充组别页面、年份页面和技术专题。", buildDocHash("docs/contribution.md"), "fa-pen-to-square"],
+      ["成为贡献者", "参与资料校验、分类和长期维护。", `https://github.com/${config.githubRepo}`, "fa-users"]
+    ];
+    els.contributionGrid.innerHTML = contributions.map(([title, text, href, icon]) => `
+      <a class="portal-card contribution-card" href="${href}" ${href.startsWith("http") ? "target=\"_blank\" rel=\"noreferrer\"" : ""}>
+        <i class="fa-solid ${icon}"></i>
+        <strong>${title}</strong>
+        <span>${text}</span>
+      </a>
     `).join("");
 
     els.recentUpdates.innerHTML = [...state.docs]
       .sort((a, b) => String(b.stats.updated || b.path).localeCompare(String(a.stats.updated || a.path)))
-      .slice(0, 6)
+      .slice(0, 5)
       .map((doc) => `
         <a class="update-item" href="${buildDocHash(doc.path)}">
           <span><strong>${escapeHtml(doc.title)}</strong><small>${escapeHtml(doc.summary)}</small></span>
@@ -516,9 +670,16 @@
     if (!els.readmePreview) return;
     try {
       const readme = await fetchText(config.readmePath);
-      const excerpt = readme.split("\n").slice(0, 90).join("\n");
-      els.readmePreview.innerHTML = md.render(excerpt);
-      enhanceReadmePreviewLinks();
+      const intro = stripMarkdown(readme.split("\n\n").slice(0, 2).join(" ")).slice(0, 180);
+      els.readmePreview.innerHTML = `
+        <article class="readme-card">
+          <p>${escapeHtml(intro || "面向全国大学生智能车竞赛的开源资料索引站点，持续整理年份、组别、知识和资源导航。")}</p>
+          <div class="card-actions">
+            <a href="README.md" target="_blank" rel="noreferrer">阅读全文</a>
+            <a href="${buildDocHash("docs/contribution.md")}">参与贡献</a>
+          </div>
+        </article>
+      `;
     } catch (error) {
       els.readmePreview.innerHTML = `<p>README 暂时不可用：${escapeHtml(error.message)}</p>`;
     }
@@ -1435,7 +1596,7 @@
       }
       return;
     }
-    navigator.serviceWorker.register("sw.js?v=4").catch(() => {});
+    navigator.serviceWorker.register("sw.js?v=5").catch(() => {});
   }
 
   function bindEvents() {
