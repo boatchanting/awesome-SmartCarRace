@@ -22,9 +22,9 @@
 ![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-222222?style=flat-square&logo=githubpages)
 
 [🌐 在线浏览](https://boatchanting.github.io/awesome-SmartCarRace/) ·
-[📚 知识库](docs/knowledge/index.md) ·
-[🧭 资源导航](data/resources.index.json) ·
-[🤝 参与贡献](docs/contribution.md)
+[📚 知识库](https://boatchanting.github.io/awesome-SmartCarRace/#/docs/knowledge/index.md) ·
+[🧭 资源导航](https://boatchanting.github.io/awesome-SmartCarRace/#/resources) ·
+[🤝 参与贡献](https://boatchanting.github.io/awesome-SmartCarRace/#/docs/contribution.md)
 
 <br>
 
