@@ -26,6 +26,19 @@
 [🧭 资源导航](data/resources.index.json) ·
 [🤝 参与贡献](docs/contribution.md)
 
+<br>
+
+<a href="https://boatchanting.github.io/awesome-SmartCarRace/">
+  <img src="https://image.thum.io/get/maxAge/24/width/1200/crop/760/https://boatchanting.github.io/awesome-SmartCarRace/" alt="Awesome SmartCar Race website preview" width="860">
+</a>
+
+### 页面快照
+
+| 项目介绍 | 站点架构 | 资源导航 |
+| --- | --- | --- |
+| 了解项目目标、信息架构、使用场景与社区边界。 | 查看 GitHub Pages 静态站点骨架、资源数据结构和部署方式。 | 按年份、组别、类型和主题筛选智能车竞赛相关资源。 |
+| [<img src="https://api.microlink.io/?url=https%3A%2F%2Fboatchanting.github.io%2Fawesome-SmartCarRace%2F%23%2Fdocs%2Fintro.md&screenshot=true&embed=screenshot.url&waitForSelector=%23doc-content%20h1&waitUntil=networkidle0" alt="项目介绍页面快照" width="260">](https://boatchanting.github.io/awesome-SmartCarRace/#/docs/intro.md) | [<img src="https://api.microlink.io/?url=https%3A%2F%2Fboatchanting.github.io%2Fawesome-SmartCarRace%2F%23%2Fdocs%2Fsite-architecture.md%3Fanchor%3D%25E8%25B5%2584%25E6%25BA%2590%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584&screenshot=true&embed=screenshot.url&waitForSelector=%23doc-content%20h1&waitUntil=networkidle0" alt="站点架构页面快照" width="260">](https://boatchanting.github.io/awesome-SmartCarRace/#/docs/site-architecture.md?anchor=%E8%B5%84%E6%BA%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84) | [<img src="https://api.microlink.io/?url=https%3A%2F%2Fboatchanting.github.io%2Fawesome-SmartCarRace%2F%23%2Fresources&screenshot=true&embed=screenshot.url&waitForSelector=.resource-card&waitUntil=networkidle0" alt="资源导航页面快照" width="260">](https://boatchanting.github.io/awesome-SmartCarRace/#/resources) |
+
 </div>
 
 ---
