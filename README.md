@@ -12,8 +12,9 @@
 [![Forks](https://img.shields.io/github/forks/boatchanting/awesome-SmartCarRace?style=flat-square&logo=github)](https://github.com/boatchanting/awesome-SmartCarRace/network/members)
 [![Code License: MIT](https://img.shields.io/badge/code-MIT-2563eb?style=flat-square&logo=opensourceinitiative&logoColor=white)](LICENSE#source-code-license-mit)
 [![Content License: CC BY 4.0](https://img.shields.io/badge/content-CC%20BY%204.0-f59e0b?style=flat-square&logo=creativecommons&logoColor=white)](LICENSE#content-license-cc-by-40)
-[![Last Commit](https://img.shields.io/github/last-commit/boatchanting/awesome-SmartCarRace?style=flat-square)](https://github.com/boatchanting/awesome-SmartCarRace/commits/main)
+
 [![Tag](https://img.shields.io/github/v/tag/boatchanting/awesome-SmartCarRace?style=flat-square&label=tag&color=0f766e)](https://github.com/boatchanting/awesome-SmartCarRace/tags)
+[![Last Commit](https://img.shields.io/github/last-commit/boatchanting/awesome-SmartCarRace?style=flat-square)](https://github.com/boatchanting/awesome-SmartCarRace/commits/main)
 [![Issues](https://img.shields.io/github/issues/boatchanting/awesome-SmartCarRace?style=flat-square)](https://github.com/boatchanting/awesome-SmartCarRace/issues)
 [![Closed Issues](https://img.shields.io/github/issues-closed/boatchanting/awesome-SmartCarRace?style=flat-square&label=issues%20closed)](https://github.com/boatchanting/awesome-SmartCarRace/issues?q=is%3Aissue%20state%3Aclosed)
 [![Pull Requests](https://img.shields.io/github/issues-pr/boatchanting/awesome-SmartCarRace?style=flat-square)](https://github.com/boatchanting/awesome-SmartCarRace/pulls)
