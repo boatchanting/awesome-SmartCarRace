@@ -1,0 +1,128 @@
+{
+  "generatedAt": "2026-06-06T08:53:45.974Z",
+  "root": "docs",
+  "files": [
+    "docs/commit-message.md",
+    "docs/contribution.md",
+    "docs/data-model.md",
+    "docs/groups/2025/平衡轮腿.md",
+    "docs/groups/2025/ai-vision.md",
+    "docs/groups/2025/camera.md",
+    "docs/groups/2025/electromagnetic.md",
+    "docs/groups/2025/index.md",
+    "docs/intro.md",
+    "docs/knowledge/getting-started.md",
+    "docs/knowledge/hardware/sensors.md",
+    "docs/knowledge/index.md",
+    "docs/knowledge/software/control-and-path.md",
+    "docs/knowledge/tools/debugging.md",
+    "docs/roadmaps/collection-roadmap.md",
+    "docs/roadmaps/information-architecture.md",
+    "docs/site-architecture.md",
+    "docs/years/2023.md",
+    "docs/years/2024.md",
+    "docs/years/index.md"
+  ],
+  "docs": [
+    {
+      "path": "docs/commit-message.md",
+      "created": "2026-05-28T12:50:11.285Z",
+      "updated": "2026-05-28T12:50:13.716Z"
+    },
+    {
+      "path": "docs/contribution.md",
+      "created": "2026-05-27T13:33:20.230Z",
+      "updated": "2026-05-27T14:09:11.979Z"
+    },
+    {
+      "path": "docs/data-model.md",
+      "created": "2026-05-27T13:25:24.633Z",
+      "updated": "2026-05-27T14:08:18.265Z"
+    },
+    {
+      "path": "docs/groups/2025/平衡轮腿.md",
+      "created": "2026-05-27T13:33:22.775Z",
+      "updated": "2026-05-28T12:46:00.789Z"
+    },
+    {
+      "path": "docs/groups/2025/ai-vision.md",
+      "created": "2026-05-27T13:33:22.956Z",
+      "updated": "2026-05-27T13:33:22.956Z"
+    },
+    {
+      "path": "docs/groups/2025/camera.md",
+      "created": "2026-05-28T12:46:11.757Z",
+      "updated": "2026-05-27T13:33:22.509Z"
+    },
+    {
+      "path": "docs/groups/2025/electromagnetic.md",
+      "created": "2026-05-28T12:46:15.325Z",
+      "updated": "2026-05-27T13:33:22.648Z"
+    },
+    {
+      "path": "docs/groups/2025/index.md",
+      "created": "2026-05-28T12:46:18.622Z",
+      "updated": "2026-05-28T12:46:56.077Z"
+    },
+    {
+      "path": "docs/intro.md",
+      "created": "2026-05-27T13:33:20.067Z",
+      "updated": "2026-05-27T13:33:20.067Z"
+    },
+    {
+      "path": "docs/knowledge/getting-started.md",
+      "created": "2026-05-27T13:33:20.906Z",
+      "updated": "2026-05-27T13:33:20.907Z"
+    },
+    {
+      "path": "docs/knowledge/hardware/sensors.md",
+      "created": "2026-05-27T13:33:21.124Z",
+      "updated": "2026-05-27T13:33:21.124Z"
+    },
+    {
+      "path": "docs/knowledge/index.md",
+      "created": "2026-05-27T13:33:20.782Z",
+      "updated": "2026-05-27T13:33:20.782Z"
+    },
+    {
+      "path": "docs/knowledge/software/control-and-path.md",
+      "created": "2026-05-27T13:33:21.336Z",
+      "updated": "2026-05-27T13:33:21.337Z"
+    },
+    {
+      "path": "docs/knowledge/tools/debugging.md",
+      "created": "2026-05-27T13:33:21.562Z",
+      "updated": "2026-05-27T13:33:21.562Z"
+    },
+    {
+      "path": "docs/roadmaps/collection-roadmap.md",
+      "created": "2026-05-27T13:33:20.578Z",
+      "updated": "2026-05-27T13:33:20.579Z"
+    },
+    {
+      "path": "docs/roadmaps/information-architecture.md",
+      "created": "2026-05-27T13:33:20.434Z",
+      "updated": "2026-05-27T13:33:20.434Z"
+    },
+    {
+      "path": "docs/site-architecture.md",
+      "created": "2026-05-27T13:27:00.794Z",
+      "updated": "2026-05-27T14:08:18.379Z"
+    },
+    {
+      "path": "docs/years/2023.md",
+      "created": "2026-05-27T13:33:22.078Z",
+      "updated": "2026-05-27T13:33:22.078Z"
+    },
+    {
+      "path": "docs/years/2024.md",
+      "created": "2026-05-27T13:33:21.940Z",
+      "updated": "2026-05-27T13:33:21.940Z"
+    },
+    {
+      "path": "docs/years/index.md",
+      "created": "2026-05-27T13:33:21.798Z",
+      "updated": "2026-05-27T13:33:21.798Z"
+    }
+  ]
+}

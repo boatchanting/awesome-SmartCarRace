@@ -1,0 +1,17 @@
+{
+  "name": "智能车竞赛知识库",
+  "short_name": "SmartCar Docs",
+  "description": "智能车竞赛 Markdown 文档站点与资源导航。",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#071312",
+  "theme_color": "#0f766e",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='42' fill='%230f766e'/%3E%3Ctext x='96' y='116' font-family='Arial' font-size='64' font-weight='700' text-anchor='middle' fill='white'%3ESC%3C/text%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://example.com/#/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://example.com/#/resources</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://example.com/#/docs/commit-message.md</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://example.com/#/docs/contribution.md</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://example.com/#/docs/data-model.md</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://example.com/#/docs/groups/2025/%E5%B9%B3%E8%A1%A1%E8%BD%AE%E8%85%BF.md</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://example.com/#/docs/groups/2025/ai-vision.md</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://example.com/#/docs/groups/2025/camera.md</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://example.com/#/docs/groups/2025/electromagnetic.md</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://example.com/#/docs/groups/2025/index.md</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://example.com/#/docs/intro.md</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://example.com/#/docs/knowledge/getting-started.md</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://example.com/#/docs/knowledge/hardware/sensors.md</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://example.com/#/docs/knowledge/index.md</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://example.com/#/docs/knowledge/software/control-and-path.md</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://example.com/#/docs/knowledge/tools/debugging.md</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://example.com/#/docs/roadmaps/collection-roadmap.md</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://example.com/#/docs/roadmaps/information-architecture.md</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://example.com/#/docs/site-architecture.md</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://example.com/#/docs/years/2023.md</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://example.com/#/docs/years/2024.md</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://example.com/#/docs/years/index.md</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+</urlset>
