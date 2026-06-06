@@ -24,14 +24,24 @@ function toPosix(relativePath) {
   return relativePath.split(path.sep).join("/");
 }
 
-const files = walk(docsRoot)
-  .map((file) => toPosix(path.relative(repoRoot, file)))
-  .sort((a, b) => a.localeCompare(b, "zh-CN", { numeric: true }));
+const docs = walk(docsRoot)
+  .map((file) => {
+    const stat = fs.statSync(file);
+    return {
+      path: toPosix(path.relative(repoRoot, file)),
+      created: stat.birthtime.toISOString(),
+      updated: stat.mtime.toISOString()
+    };
+  })
+  .sort((a, b) => a.path.localeCompare(b.path, "zh-CN", { numeric: true }));
+
+const files = docs.map((doc) => doc.path);
 
 const manifest = {
   generatedAt: new Date().toISOString(),
   root: "docs",
-  files
+  files,
+  docs
 };
 
 fs.writeFileSync(path.join(docsRoot, "manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`);

@@ -74,6 +74,7 @@
   const state = {
     docs: [],
     docsByPath: new Map(),
+    manifestMeta: new Map(),
     fuse: null,
     activeDoc: null,
     headings: [],
@@ -211,7 +212,13 @@
 
   async function loadManifest() {
     const manifest = await fetchJson(config.manifest);
-    return Array.isArray(manifest) ? manifest : manifest.files || [];
+    if (Array.isArray(manifest)) return manifest;
+    const files = Array.isArray(manifest.files) ? manifest.files : [];
+    const docs = Array.isArray(manifest.docs) ? manifest.docs : [];
+    state.manifestMeta = new Map(docs
+      .filter((doc) => doc && typeof doc.path === "string")
+      .map((doc) => [decodeURI(doc.path), doc]));
+    return files;
   }
 
   async function scanGithubTree() {
@@ -305,6 +312,24 @@
     return date.toISOString().slice(0, 10);
   }
 
+  function buildDocHash(path, anchor = "") {
+    const route = `#/${encodeURI(path)}`;
+    return anchor ? `${route}?anchor=${encodeURIComponent(anchor)}` : route;
+  }
+
+  function parseDocRoute(hash) {
+    const docMatch = hash.match(/^#\/(docs\/.+\.md)(?:\?anchor=(.+))?$/i);
+    if (!docMatch) return null;
+    return {
+      path: decodeURI(docMatch[1]),
+      anchor: docMatch[2] ? decodeURIComponent(docMatch[2]) : ""
+    };
+  }
+
+  function isLocalHost() {
+    return ["127.0.0.1", "localhost", "::1"].includes(window.location.hostname);
+  }
+
   function titleToPinyinSeed(text) {
     // 轻量拼音搜索占位：不引入大词库时，保留中文、首字母和英文；可替换为 pinyin-pro CDN。
     return String(text).normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -316,13 +341,14 @@
       try {
         const markdown = await fetchText(path);
         const { data, body } = parseFrontMatter(markdown);
+        const meta = state.manifestMeta.get(decodeURI(path)) || {};
         const title = extractTitle(body, path, data);
         const words = countWords(body);
         const stats = {
           words,
           readTime: estimateReadTime(words),
-          created: data.created || data.date || "",
-          updated: data.updated || data.modified || data.date || "",
+          created: meta.created || data.created || data.date || "",
+          updated: meta.updated || data.updated || data.modified || data.date || "",
           author: data.author || "智能车竞赛社区",
           category: data.category || inferCategory(path),
           tags: inferTags(path, data)
@@ -390,7 +416,7 @@
         </details>
       `).join("");
       const files = node.files.map((doc) => `
-        <a href="#/${encodeURI(doc.path)}" data-path="${escapeHtml(doc.path)}" style="--depth:${depth}">
+        <a href="${buildDocHash(doc.path)}" data-path="${escapeHtml(doc.path)}" style="--depth:${depth}">
           <i class="fa-regular fa-file-lines"></i><span>${escapeHtml(doc.title)}</span>
         </a>
       `).join("");
@@ -428,7 +454,7 @@
       .sort((a, b) => String(b.stats.updated || b.path).localeCompare(String(a.stats.updated || a.path)))
       .slice(0, 6)
       .map((doc) => `
-        <a class="update-item" href="#/${encodeURI(doc.path)}">
+        <a class="update-item" href="${buildDocHash(doc.path)}">
           <span><strong>${escapeHtml(doc.title)}</strong><small>${escapeHtml(doc.summary)}</small></span>
           <time>${escapeHtml(formatDate(doc.stats.updated || doc.stats.created))}</time>
         </a>
@@ -452,7 +478,7 @@
     $$("a", els.readmePreview).forEach((link) => {
       const href = link.getAttribute("href") || "";
       if (/^docs\/.+\.md/.test(href)) {
-        link.href = `#/${href}`;
+        link.href = buildDocHash(href);
       } else if (/^https?:\/\//.test(href)) {
         link.target = "_blank";
         link.rel = "noreferrer";
@@ -475,7 +501,7 @@
     els.breadcrumbs.innerHTML = crumbs.join(`<i class="fa-solid fa-chevron-right"></i>`);
   }
 
-  function renderDoc(path) {
+  function renderDoc(path, anchor = "") {
     const doc = state.docsByPath.get(decodeURI(path)) || state.docs[0];
     if (!doc) return;
     state.activeDoc = doc;
@@ -486,7 +512,8 @@
     els.docMeta.innerHTML = `
       <span>📄 ${doc.stats.words.toLocaleString("zh-CN")} 字</span>
       <span>⏱ ${doc.stats.readTime} 分钟</span>
-      <span>🕒 ${escapeHtml(formatDate(doc.stats.updated || doc.stats.created))}</span>
+      <span>🗓 创建 ${escapeHtml(formatDate(doc.stats.created))}</span>
+      <span>🕒 更新 ${escapeHtml(formatDate(doc.stats.updated || doc.stats.created))}</span>
       <span>✍️ ${escapeHtml(doc.stats.author || "社区")}</span>
     `;
     els.docTags.innerHTML = doc.stats.tags.map((tag) => `<a class="pill" href="#/search/${encodeURIComponent(tag)}">#${escapeHtml(tag)}</a>`).join("");
@@ -498,7 +525,7 @@
     enhanceRenderedMarkdown();
     renderPager(doc);
     updateActiveTree(path);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    scrollToDocAnchor(anchor);
   }
 
   function enhanceRenderedMarkdown() {
@@ -518,7 +545,7 @@
       used.set(base, count + 1);
       const id = count ? `${base}-${count + 1}` : base;
       heading.id = id;
-      heading.innerHTML = `<a class="heading-anchor" href="#${id}" aria-hidden="true">#</a>${heading.innerHTML}`;
+      heading.innerHTML = `<a class="heading-anchor" href="${buildDocHash(state.activeDoc.path, id)}" aria-hidden="true">#</a>${heading.innerHTML}`;
       return { id, text, level: Number(heading.tagName.slice(1)), element: heading };
     });
   }
@@ -550,8 +577,11 @@
       if (/^https?:\/\//.test(href)) {
         link.target = "_blank";
         link.rel = "noreferrer";
-      } else if (href.endsWith(".md")) {
-        link.href = `#/${new URL(href, location.origin + "/" + state.activeDoc.path).pathname.replace(/^\//, "")}`;
+      } else if (/^#.+/.test(href)) {
+        link.href = buildDocHash(state.activeDoc.path, href.slice(1));
+      } else if (/\.md(?:#.*)?$/.test(href)) {
+        const resolved = new URL(href, location.origin + "/" + state.activeDoc.path);
+        link.href = buildDocHash(resolved.pathname.replace(/^\//, ""), resolved.hash.replace(/^#/, ""));
       }
     });
 
@@ -583,7 +613,7 @@
   function buildToc() {
     const headings = state.headings.filter((heading) => heading.level >= 2 && heading.level <= 4);
     els.toc.innerHTML = headings.length
-      ? headings.map((heading) => `<a href="#${heading.id}" data-id="${heading.id}" style="--level:${heading.level}">${escapeHtml(heading.text)}</a>`).join("")
+      ? headings.map((heading) => `<a href="${buildDocHash(state.activeDoc.path, heading.id)}" data-id="${heading.id}" style="--level:${heading.level}">${escapeHtml(heading.text)}</a>`).join("")
       : `<span class="toc-empty">本文暂无目录</span>`;
   }
 
@@ -592,9 +622,25 @@
     const prev = state.docs[index - 1];
     const next = state.docs[index + 1];
     els.docPager.innerHTML = `
-      ${prev ? `<a class="pager-card" href="#/${encodeURI(prev.path)}"><span>上一篇</span><strong>${escapeHtml(prev.title)}</strong></a>` : "<span></span>"}
-      ${next ? `<a class="pager-card next" href="#/${encodeURI(next.path)}"><span>下一篇</span><strong>${escapeHtml(next.title)}</strong></a>` : "<span></span>"}
+      ${prev ? `<a class="pager-card" href="${buildDocHash(prev.path)}"><span>上一篇</span><strong>${escapeHtml(prev.title)}</strong></a>` : "<span></span>"}
+      ${next ? `<a class="pager-card next" href="${buildDocHash(next.path)}"><span>下一篇</span><strong>${escapeHtml(next.title)}</strong></a>` : "<span></span>"}
     `;
+  }
+
+  function scrollToDocAnchor(anchor) {
+    if (!anchor) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    const target = document.getElementById(anchor);
+    if (!target) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    requestAnimationFrame(() => {
+      target.scrollIntoView({ block: "start", behavior: "smooth" });
+      updateTocActive();
+    });
   }
 
   function updateActiveTree(path) {
@@ -614,7 +660,7 @@
     const trimmed = query.trim();
     const docs = trimmed ? state.fuse.search(trimmed).map((result) => ({ doc: result.item, matches: result.matches })) : state.docs.slice(0, 8).map((doc) => ({ doc, matches: [] }));
     els.searchResults.innerHTML = docs.length ? docs.slice(0, 12).map(({ doc }) => `
-      <a class="search-result" href="#/${encodeURI(doc.path)}" data-close-search>
+      <a class="search-result" href="${buildDocHash(doc.path)}" data-close-search>
         <strong>${highlight(doc.title, trimmed)}</strong>
         <span>${highlight(doc.summary || doc.searchText.slice(0, 140), trimmed)}</span>
         <small>${escapeHtml(doc.stats.category)} · ${doc.stats.tags.map((tag) => `#${escapeHtml(tag)}`).join(" ")}</small>
@@ -656,10 +702,10 @@
       showView("resources");
       return;
     }
-    const docMatch = hash.match(/^#\/(docs\/.+\.md)$/i);
-    if (docMatch) {
+    const docRoute = parseDocRoute(hash);
+    if (docRoute) {
       showView("doc");
-      renderDoc(docMatch[1]);
+      renderDoc(docRoute.path, docRoute.anchor);
       return;
     }
     showView("home");
@@ -864,9 +910,20 @@
     renderResources();
   }
 
-  function registerServiceWorker() {
-    if (!config.enablePwa || !("serviceWorker" in navigator)) return;
-    navigator.serviceWorker.register("sw.js").catch(() => {});
+  async function registerServiceWorker() {
+    if (!("serviceWorker" in navigator)) return;
+    if (isLocalHost() || !config.enablePwa) {
+      const registrations = await navigator.serviceWorker.getRegistrations().catch(() => []);
+      await Promise.all(registrations.map((registration) => registration.unregister().catch(() => false)));
+      if ("caches" in window) {
+        const keys = await caches.keys().catch(() => []);
+        await Promise.all(keys
+          .filter((key) => key.startsWith("smartcar-docs-"))
+          .map((key) => caches.delete(key).catch(() => false)));
+      }
+      return;
+    }
+    navigator.serviceWorker.register("sw.js?v=2").catch(() => {});
   }
 
   function bindEvents() {
