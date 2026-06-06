@@ -29,11 +29,6 @@ feat(repo): 优化站点界面并新增资源录入系统
 - docs(readme): 补充资源草稿导入和校验说明
 - fix(resources): 补充 open-hardware 主题枚举，修复资源校验失败
 - fix(sw): 更新缓存版本，确保新样式和脚本生效
-
-验证：
-- node --check main.js
-- node --check scripts/import-resource-drafts.js
-- node scripts/validate-resources.js
 ```
 
 ---

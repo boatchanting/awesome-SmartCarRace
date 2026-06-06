@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css" media="(prefers-color-scheme: dark)">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css" media="(prefers-color-scheme: light)">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css">
-    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="style.css?v=4">
   </head>
   <body data-theme="auto" data-view="home">
     <div class="read-progress" id="read-progress" aria-hidden="true"></div>
@@ -111,6 +111,9 @@
               <p class="eyebrow">Resource Browser</p>
               <h1 id="resources-heading">资源浏览器</h1>
               <p>保留原有资源聚合能力，配合知识库共同作为备赛入口。</p>
+              <div class="hero-actions">
+                <button class="btn primary" id="toggle-resource-builder" type="button" aria-controls="resource-builder" aria-expanded="false"><i class="fa-solid fa-plus"></i>添加资源</button>
+              </div>
             </div>
             <form class="search-panel" id="filters" role="search" aria-label="资源筛选">
               <label class="search-field" for="keyword">
@@ -125,7 +128,7 @@
               </div>
             </form>
           </div>
-          <section class="resource-builder" aria-labelledby="resource-builder-heading">
+          <section class="resource-builder" id="resource-builder" aria-labelledby="resource-builder-heading" hidden>
             <div class="section-head">
               <div>
                 <p class="eyebrow">Resource Intake</p>
@@ -135,6 +138,7 @@
               <div class="resource-builder-actions">
                 <button class="btn ghost" id="export-resource-drafts" type="button"><i class="fa-solid fa-file-export"></i>导出 JSON</button>
                 <button class="btn ghost" id="clear-resource-drafts" type="button"><i class="fa-solid fa-trash-can"></i>清空新增</button>
+                <button class="btn ghost" id="close-resource-builder" type="button"><i class="fa-solid fa-chevron-up"></i>收起</button>
               </div>
             </div>
             <form class="resource-form" id="resource-form">
@@ -159,8 +163,24 @@
             <h2>全部资源</h2>
             <div class="result-meta" id="result-meta" aria-live="polite">正在加载资源...</div>
           </div>
+          <div class="resource-toolbar" aria-label="资源浏览设置">
+            <div class="view-toggle" role="group" aria-label="浏览方式">
+              <button class="resource-view-btn active" type="button" data-resource-view="grid"><i class="fa-solid fa-grip"></i><span>多列布局</span></button>
+              <button class="resource-view-btn" type="button" data-resource-view="detail"><i class="fa-solid fa-table-list"></i><span>详细信息</span></button>
+            </div>
+            <label class="page-size-control" for="resource-page-size">
+              <span>每页</span>
+              <select id="resource-page-size">
+                <option value="20">20 条</option>
+                <option value="50" selected>50 条</option>
+                <option value="100">100 条</option>
+                <option value="200">200 条</option>
+              </select>
+            </label>
+          </div>
           <div class="state-message" id="state-message" hidden></div>
           <div class="resource-grid" id="resource-list"></div>
+          <nav class="resource-pager" id="resource-pager" aria-label="资源分页"></nav>
         </section>
 
         <section class="doc-view" id="doc-view" hidden aria-labelledby="doc-title">
@@ -243,6 +263,6 @@
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"></script>
-    <script src="main.js?v=3" defer></script>
+    <script src="main.js?v=4" defer></script>
   </body>
 </html>

@@ -85,6 +85,9 @@
     resources: [],
     taxonomy: fallbackTaxonomy,
     filters: { keyword: "", year: "", group: "", type: "", topic: "" },
+    resourceView: localStorage.getItem("resource-view-mode") || "grid",
+    resourcePageSize: Number(localStorage.getItem("resource-page-size") || 50),
+    resourcePage: 1,
     searchScopes: { docs: true, resources: true }
   };
 
@@ -137,6 +140,11 @@
     resultMeta: $("#result-meta"),
     stateMessage: $("#state-message"),
     resourceList: $("#resource-list"),
+    resourcePager: $("#resource-pager"),
+    resourcePageSize: $("#resource-page-size"),
+    toggleResourceBuilder: $("#toggle-resource-builder"),
+    closeResourceBuilder: $("#close-resource-builder"),
+    resourceBuilder: $("#resource-builder"),
     resourceForm: $("#resource-form"),
     resourceTitle: $("#resource-title"),
     resourceUrl: $("#resource-url"),
@@ -1249,35 +1257,97 @@
     return values.map((value) => `<span class="pill">${escapeHtml(labelFor(mapName, value))}</span>`).join("");
   }
 
-  function renderResources() {
-    const results = state.resources.filter(matchesFilters);
-    els.resultMeta.textContent = `共 ${results.length} / ${state.resources.length} 条资源`;
-    if (!results.length) {
-      els.resourceList.innerHTML = `<div class="state-message">没有匹配的资源，请调整筛选条件。</div>`;
-      return;
-    }
-    els.resourceList.innerHTML = results.map((item) => {
-      const action = item.url
-        ? `<a href="${escapeHtml(isInternalDoc(item.url) ? `#/${item.url.replace(/^#\//, "")}` : item.url)}" ${isInternalDoc(item.url) ? "" : "target=\"_blank\" rel=\"noreferrer\""}>打开资源</a>`
-        : `<span class="pill">待补充链接</span>`;
-      const tags = item.tags.map((tag) => `<span class="tag">#${escapeHtml(tag)}</span>`).join("");
-      return `
-        <article class="resource-card">
-          <div class="card-topline">
-            ${item.year ? `<span>${escapeHtml(item.year)}</span>` : ""}
-            ${item.local ? `<span class="pill local">本地新增</span>` : ""}
-            ${item.featured ? `<span class="pill featured">精选</span>` : ""}
-            ${renderPills(item.groups, "groups")}
-            ${item.type ? `<span class="pill">${escapeHtml(labelFor("resourceTypes", item.type))}</span>` : ""}
-          </div>
+  function clampResourcePage(totalPages) {
+    state.resourcePage = Math.min(Math.max(1, state.resourcePage), Math.max(1, totalPages));
+  }
+
+  function setResourceView(view) {
+    state.resourceView = view === "detail" ? "detail" : "grid";
+    localStorage.setItem("resource-view-mode", state.resourceView);
+    els.resourceList.dataset.view = state.resourceView;
+    $$(".resource-view-btn").forEach((button) => {
+      const active = button.dataset.resourceView === state.resourceView;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+    renderResources();
+  }
+
+  function setResourcePageSize(value) {
+    const size = Number(value);
+    state.resourcePageSize = [20, 50, 100, 200].includes(size) ? size : 50;
+    localStorage.setItem("resource-page-size", String(state.resourcePageSize));
+    if (els.resourcePageSize) els.resourcePageSize.value = String(state.resourcePageSize);
+    state.resourcePage = 1;
+    renderResources();
+  }
+
+  function renderResourceCard(item) {
+    const action = item.url
+      ? `<a href="${escapeHtml(isInternalDoc(item.url) ? `#/${item.url.replace(/^#\//, "")}` : item.url)}" ${isInternalDoc(item.url) ? "" : "target=\"_blank\" rel=\"noreferrer\""}>打开资源</a>`
+      : `<span class="pill">待补充链接</span>`;
+    const tags = item.tags.map((tag) => `<span class="tag">#${escapeHtml(tag)}</span>`).join("");
+    const groups = item.groups.map((id) => labelFor("groups", id)).filter(Boolean).join("、") || "未分组";
+    const topics = item.topics.map((id) => labelFor("topics", id)).filter(Boolean).join("、") || "未标注";
+    const updated = item.updatedAt || item.createdAt || "";
+    return `
+      <article class="resource-card">
+        <div class="card-topline">
+          ${item.year ? `<span>${escapeHtml(item.year)}</span>` : ""}
+          ${item.local ? `<span class="pill local">本地新增</span>` : ""}
+          ${item.featured ? `<span class="pill featured">精选</span>` : ""}
+          ${renderPills(item.groups, "groups")}
+          ${item.type ? `<span class="pill">${escapeHtml(labelFor("resourceTypes", item.type))}</span>` : ""}
+        </div>
+        <div class="resource-card-main">
           <h3>${escapeHtml(item.title)}</h3>
           <p>${escapeHtml(item.description || "暂无简介。")}</p>
-          ${item.source ? `<p><strong>来源：</strong>${escapeHtml(item.source)}</p>` : ""}
-          <div class="tag-list">${renderPills(item.topics, "topics")}${item.level ? `<span class="pill level">${escapeHtml(labelFor("levels", item.level))}</span>` : ""}${tags}</div>
-          <div class="card-actions">${action}</div>
-        </article>
-      `;
-    }).join("");
+          ${item.source ? `<p class="resource-source"><strong>来源：</strong>${escapeHtml(item.source)}</p>` : ""}
+        </div>
+        <dl class="resource-detail-meta">
+          <div><dt>年份</dt><dd>${escapeHtml(item.year || "未标注")}</dd></div>
+          <div><dt>组别</dt><dd>${escapeHtml(groups)}</dd></div>
+          <div><dt>类型</dt><dd>${escapeHtml(labelFor("resourceTypes", item.type) || "未标注")}</dd></div>
+          <div><dt>主题</dt><dd>${escapeHtml(topics)}</dd></div>
+          <div><dt>难度</dt><dd>${escapeHtml(labelFor("levels", item.level) || "未标注")}</dd></div>
+          ${updated ? `<div><dt>更新</dt><dd>${escapeHtml(updated)}</dd></div>` : ""}
+        </dl>
+        <div class="tag-list">${renderPills(item.topics, "topics")}${item.level ? `<span class="pill level">${escapeHtml(labelFor("levels", item.level))}</span>` : ""}${tags}</div>
+        <div class="card-actions">${action}</div>
+      </article>
+    `;
+  }
+
+  function renderResourcePager(total, totalPages) {
+    if (!els.resourcePager) return;
+    if (totalPages <= 1) {
+      els.resourcePager.innerHTML = "";
+      return;
+    }
+    const start = (state.resourcePage - 1) * state.resourcePageSize + 1;
+    const end = Math.min(total, state.resourcePage * state.resourcePageSize);
+    els.resourcePager.innerHTML = `
+      <button type="button" data-page="prev" ${state.resourcePage <= 1 ? "disabled" : ""}><i class="fa-solid fa-chevron-left"></i>上一页</button>
+      <span>第 ${state.resourcePage} / ${totalPages} 页，${start}-${end} 条</span>
+      <button type="button" data-page="next" ${state.resourcePage >= totalPages ? "disabled" : ""}>下一页<i class="fa-solid fa-chevron-right"></i></button>
+    `;
+  }
+
+  function renderResources() {
+    const results = state.resources.filter(matchesFilters);
+    const totalPages = Math.ceil(results.length / state.resourcePageSize) || 1;
+    clampResourcePage(totalPages);
+    const startIndex = (state.resourcePage - 1) * state.resourcePageSize;
+    const pageItems = results.slice(startIndex, startIndex + state.resourcePageSize);
+    els.resourceList.dataset.view = state.resourceView;
+    els.resultMeta.textContent = `共 ${results.length} / ${state.resources.length} 条资源，当前第 ${state.resourcePage} 页`;
+    if (!results.length) {
+      els.resourceList.innerHTML = `<div class="state-message">没有匹配的资源，请调整筛选条件。</div>`;
+      renderResourcePager(0, 1);
+      return;
+    }
+    els.resourceList.innerHTML = pageItems.map(renderResourceCard).join("");
+    renderResourcePager(results.length, totalPages);
   }
 
   function isInternalDoc(url) {
@@ -1315,6 +1385,7 @@
     }
     hydrateFilters();
     hydrateResourceForm();
+    hydrateResourceControls();
     renderResources();
   }
 
@@ -1324,7 +1395,31 @@
     state.filters.group = els.group.value;
     state.filters.type = els.type.value;
     state.filters.topic = els.topic.value;
+    state.resourcePage = 1;
     renderResources();
+  }
+
+  function hydrateResourceControls() {
+    state.resourceView = state.resourceView === "detail" ? "detail" : "grid";
+    state.resourcePageSize = [20, 50, 100, 200].includes(state.resourcePageSize) ? state.resourcePageSize : 50;
+    if (els.resourcePageSize) els.resourcePageSize.value = String(state.resourcePageSize);
+    if (els.resourceList) els.resourceList.dataset.view = state.resourceView;
+    $$(".resource-view-btn").forEach((button) => {
+      const active = button.dataset.resourceView === state.resourceView;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+  }
+
+  function setResourceBuilderOpen(open) {
+    els.resourceBuilder.hidden = !open;
+    els.toggleResourceBuilder.setAttribute("aria-expanded", String(open));
+    els.toggleResourceBuilder.innerHTML = open
+      ? `<i class="fa-solid fa-chevron-up"></i>收起资源工具`
+      : `<i class="fa-solid fa-plus"></i>添加资源`;
+    if (open) {
+      requestAnimationFrame(() => els.resourceBuilder.scrollIntoView({ block: "start", behavior: "smooth" }));
+    }
   }
 
   async function registerServiceWorker() {
@@ -1340,7 +1435,7 @@
       }
       return;
     }
-    navigator.serviceWorker.register("sw.js?v=2").catch(() => {});
+    navigator.serviceWorker.register("sw.js?v=4").catch(() => {});
   }
 
   function bindEvents() {
@@ -1375,6 +1470,17 @@
     els.imagePreview.addEventListener("click", (event) => { if (event.target === els.imagePreview) closeImagePreview(); });
     els.filters.addEventListener("input", syncFiltersFromForm);
     els.filters.addEventListener("change", syncFiltersFromForm);
+    els.toggleResourceBuilder.addEventListener("click", () => setResourceBuilderOpen(els.resourceBuilder.hidden));
+    els.closeResourceBuilder.addEventListener("click", () => setResourceBuilderOpen(false));
+    $$(".resource-view-btn").forEach((button) => button.addEventListener("click", () => setResourceView(button.dataset.resourceView)));
+    els.resourcePageSize.addEventListener("change", (event) => setResourcePageSize(event.target.value));
+    els.resourcePager.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-page]");
+      if (!button) return;
+      state.resourcePage += button.dataset.page === "next" ? 1 : -1;
+      renderResources();
+      els.resourceList.scrollIntoView({ block: "start", behavior: "smooth" });
+    });
     els.resourceForm.addEventListener("submit", addResourceDraft);
     els.exportResourceDrafts.addEventListener("click", exportResourceDrafts);
     els.clearResourceDrafts.addEventListener("click", clearResourceDrafts);
