@@ -1621,7 +1621,9 @@
     els.toggleSidebar.addEventListener("click", () => setSidebarCollapsed(!els.body.classList.contains("sidebar-collapsed")));
     els.toggleToc.addEventListener("click", () => setTocCollapsed(!els.body.classList.contains("toc-collapsed")));
     els.mobileMenu.addEventListener("click", () => {
-      if (els.body.classList.contains("sidebar-collapsed")) return;
+      if (els.body.classList.contains("sidebar-collapsed")) {
+        setSidebarCollapsed(false);
+      }
       const open = els.sidebar.classList.toggle("open");
       els.mobileMenu.setAttribute("aria-expanded", String(open));
     });
