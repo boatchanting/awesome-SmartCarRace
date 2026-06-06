@@ -1,0 +1,65 @@
+# License
+
+This repository uses a split license.
+
+## Scope
+
+- Source code, site implementation files, service worker code, scripts, schemas, and other software files are licensed under the MIT License.
+- Original documentation, resource metadata, curated descriptions, taxonomy, and other non-code content are licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0), unless otherwise noted.
+- Third-party resources linked, referenced, embedded, or indexed by this repository are not relicensed by this project. They remain subject to the copyright and license terms of their original authors, maintainers, publishers, or platforms.
+
+## Source Code License: MIT
+
+MIT License
+
+Copyright (c) 2026 boatchanting and contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+## Content License: CC BY 4.0
+
+Original non-code content in this repository is licensed under the Creative
+Commons Attribution 4.0 International License (CC BY 4.0), unless otherwise
+noted.
+
+Under CC BY 4.0, you may share and adapt the licensed content, including for
+commercial purposes, provided that you give appropriate credit, provide a link
+to the license, and indicate if changes were made.
+
+License summary:
+https://creativecommons.org/licenses/by/4.0/
+
+Legal code:
+https://creativecommons.org/licenses/by/4.0/legalcode
+
+Suggested attribution:
+
+"Awesome SmartCar Race Resources & Knowledge Base, by boatchanting and
+contributors, licensed under CC BY 4.0."
+
+## Third-Party Resources
+
+This project is a community-maintained resource index and knowledge base.
+Rules, schedules, official notices, competition materials, external code
+repositories, videos, articles, reports, hardware projects, and other
+third-party resources referenced by this project belong to their respective
+rightsholders.
+
+When using a third-party resource, follow the license or terms published by
+that resource's original author, maintainer, publisher, or platform.

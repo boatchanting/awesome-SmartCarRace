@@ -6,7 +6,7 @@
     title: "智能车竞赛知识库",
     docsRoot: "docs",
     manifest: "docs/manifest.json",
-    githubRepo: "boatchanting/awosome-SmartCarRace",
+    githubRepo: "boatchanting/awesome-SmartCarRace",
     githubBranch: "main",
     githubDocsPath: "docs",
     readmePath: "README.md",

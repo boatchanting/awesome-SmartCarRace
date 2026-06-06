@@ -1,26 +1,24 @@
-# 全国大学生智能车竞赛开源资料导航
-
 <div align="center">
 
-# 🏎️ 全国大学生智能车竞赛开源资料导航
+# 全国大学生智能车竞赛开源资料导航
 
 ### Awesome SmartCar Race Resources & Knowledge Base
 
 面向 **全国大学生智能车竞赛（SmartCar Race）** 的开源资料导航与长期维护知识库，持续收集历届竞赛资料、开源项目、视频教程、技术报告、经验分享与组别知识。
 
-[![Stars](https://img.shields.io/github/stars/boatchanting/awosome-SmartCarRace?style=flat-square&logo=github)](https://github.com/boatchanting/awosome-SmartCarRace/stargazers)
-[![Forks](https://img.shields.io/github/forks/boatchanting/awosome-SmartCarRace?style=flat-square&logo=github)](https://github.com/boatchanting/awosome-SmartCarRace/network/members)
-[![License](https://img.shields.io/github/license/boatchanting/awosome-SmartCarRace?style=flat-square)](LICENSE)
-[![Last Commit](https://img.shields.io/github/last-commit/boatchanting/awosome-SmartCarRace?style=flat-square)](https://github.com/boatchanting/awosome-SmartCarRace/commits/main)
-[![Issues](https://img.shields.io/github/issues/boatchanting/awosome-SmartCarRace?style=flat-square)](https://github.com/boatchanting/awosome-SmartCarRace/issues)
-[![Pull Requests](https://img.shields.io/github/issues-pr/boatchanting/awosome-SmartCarRace?style=flat-square)](https://github.com/boatchanting/awosome-SmartCarRace/pulls)
+[![Stars](https://img.shields.io/github/stars/boatchanting/awesome-SmartCarRace?style=flat-square&logo=github)](https://github.com/boatchanting/awesome-SmartCarRace/stargazers)
+[![Forks](https://img.shields.io/github/forks/boatchanting/awesome-SmartCarRace?style=flat-square&logo=github)](https://github.com/boatchanting/awesome-SmartCarRace/network/members)
+[![License](https://img.shields.io/github/license/boatchanting/awesome-SmartCarRace?style=flat-square)](LICENSE)
+[![Last Commit](https://img.shields.io/github/last-commit/boatchanting/awesome-SmartCarRace?style=flat-square)](https://github.com/boatchanting/awesome-SmartCarRace/commits/main)
+[![Issues](https://img.shields.io/github/issues/boatchanting/awesome-SmartCarRace?style=flat-square)](https://github.com/boatchanting/awesome-SmartCarRace/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/boatchanting/awesome-SmartCarRace?style=flat-square)](https://github.com/boatchanting/awesome-SmartCarRace/pulls)
 
 ![SmartCar Race](https://img.shields.io/badge/SmartCar-Race-0f766e?style=flat-square)
 ![Awesome SmartCar](https://img.shields.io/badge/Awesome-SmartCar-2563eb?style=flat-square)
 ![Knowledge Base](https://img.shields.io/badge/Knowledge-Base-f59e0b?style=flat-square)
 ![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-222222?style=flat-square&logo=githubpages)
 
-[🌐 在线浏览](https://boatchanting.github.io/awosome-SmartCarRace/) ·
+[🌐 在线浏览](https://boatchanting.github.io/awesome-SmartCarRace/) ·
 [📚 知识库](docs/knowledge/index.md) ·
 [🧭 资源导航](data/resources.index.json) ·
 [🤝 参与贡献](docs/contribution.md)
@@ -272,16 +270,16 @@ node scripts/validate-resources.js
 
 感谢所有为智能车竞赛资料开放与整理做出贡献的同学、老师和社区成员。
 
-<a href="https://github.com/boatchanting/awosome-SmartCarRace/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=boatchanting/awosome-SmartCarRace" alt="Contributors" />
+<a href="https://github.com/boatchanting/awesome-SmartCarRace/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=boatchanting/awesome-SmartCarRace" alt="Contributors" />
 </a>
 
 ---
 
 ## 📈 Star History
 
-<a href="https://star-history.com/#boatchanting/awosome-SmartCarRace&Date">
-  <img src="https://api.star-history.com/svg?repos=boatchanting/awosome-SmartCarRace&type=Date" alt="Star History Chart" />
+<a href="https://star-history.com/#boatchanting/awesome-SmartCarRace&Date">
+  <img src="https://api.star-history.com/svg?repos=boatchanting/awesome-SmartCarRace&type=Date" alt="Star History Chart" />
 </a>
 
 ---
