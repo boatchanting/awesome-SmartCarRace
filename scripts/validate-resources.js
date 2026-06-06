@@ -24,6 +24,10 @@ const requiredFields = [
   "updatedAt"
 ];
 
+const groupPathAliases = {
+  "缩微电磁": "electromagnetic"
+};
+
 function readJson(filePath) {
   try {
     return JSON.parse(fs.readFileSync(filePath, "utf8"));
@@ -73,14 +77,14 @@ function parseResourceShardPath(filePath) {
     };
   }
 
-  const groupMatch = normalized.match(/^data\/resources\/([0-9]{4})\/([a-z0-9-]+)\/resources\.json$/);
+  const groupMatch = normalized.match(/^data\/resources\/([0-9]{4})\/([^/]+)\/resources\.json$/);
   if (!groupMatch) {
     return null;
   }
 
   return {
     year: groupMatch[1],
-    group: groupMatch[2]
+    group: groupPathAliases[groupMatch[2]] || groupMatch[2]
   };
 }
 

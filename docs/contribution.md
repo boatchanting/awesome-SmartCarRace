@@ -84,3 +84,19 @@ data/resources/2025/other/resources.json
 - 是否有足够元信息支持搜索和筛选。
 - 是否存在版权、隐私或不当传播风险。
 - 是否与已有资料重复。
+
+## URL 去重检查
+
+新增资源前，可以使用脚本确认 URL 是否已经收录：
+
+```bash
+node scripts/check-resource-url.js https://example.com/resource
+```
+
+也可以一次检查多个 URL：
+
+```bash
+node scripts/check-resource-url.js https://example.com/a https://example.com/b
+```
+
+脚本会扫描 `data/resources.index.json` 中登记的分片，以及 `data/resources/` 下的资源分片；如果发现重复，会输出已有资源的 `id` 和位置。

@@ -1,0 +1,336 @@
+[
+  {
+    "id": "2025-electromagnetic-longqiu-scheme",
+    "title": "第20届智能车竞赛缩微电磁组龙邱方案分享",
+    "url": "https://blog.csdn.net/longqiu_LQ/article/details/146420325",
+    "year": "2025",
+    "groups": [
+      "electromagnetic"
+    ],
+    "type": "csdn",
+    "topics": [
+      "electromagnetic",
+      "hardware",
+      "control",
+      "embedded"
+    ],
+    "level": "intermediate",
+    "language": "zh-CN",
+    "description": "龙邱科技围绕第20届缩微电磁组整理的备赛方案分享，覆盖车模平台、无线充电、电磁循迹、基础硬件和调试思路。",
+    "source": {
+      "platform": "csdn",
+      "author": "龙邱科技"
+    },
+    "tags": [
+      "第20届",
+      "缩微电磁",
+      "龙邱",
+      "方案分享"
+    ],
+    "featured": true,
+    "createdAt": "2026-06-06",
+    "updatedAt": "2026-06-06"
+  },
+  {
+    "id": "2025-electromagnetic-gitee-micrail-cart",
+    "title": "MicRail-Cart 缩微电磁车模工程",
+    "url": "https://gitee.com/lq-tech/MicRail-Cart",
+    "year": "2025",
+    "groups": [
+      "electromagnetic"
+    ],
+    "type": "gitee",
+    "topics": [
+      "electromagnetic",
+      "hardware",
+      "embedded",
+      "control"
+    ],
+    "level": "intermediate",
+    "language": "zh-CN",
+    "description": "龙邱科技公开的 MicRail-Cart 工程仓库，配套缩微电磁组车模方案，可用于查看代码、硬件接口和工程组织方式。",
+    "source": {
+      "platform": "gitee",
+      "author": "lq-tech"
+    },
+    "tags": [
+      "MicRail-Cart",
+      "Gitee",
+      "缩微电磁",
+      "工程仓库"
+    ],
+    "featured": true,
+    "createdAt": "2026-06-06",
+    "updatedAt": "2026-06-06"
+  },
+  {
+    "id": "2025-electromagnetic-finals-team-list",
+    "title": "第二十届全国大学生智能汽车竞赛全国总决赛入围队伍名单",
+    "url": "https://blog.csdn.net/zhuoqingjoking97298/article/details/149788057",
+    "year": "2025",
+    "groups": [
+      "electromagnetic"
+    ],
+    "type": "official",
+    "topics": [
+      "rules",
+      "case-study"
+    ],
+    "level": "beginner",
+    "language": "zh-CN",
+    "description": "组委会发布的第20届全国总决赛入围队伍名单，可用于确认缩微电磁组晋级队伍、赛区来源和赛后复盘对象。",
+    "source": {
+      "platform": "csdn",
+      "author": "卓晴"
+    },
+    "tags": [
+      "全国总决赛",
+      "入围名单",
+      "缩微电磁",
+      "第20届"
+    ],
+    "featured": false,
+    "createdAt": "2026-06-06",
+    "updatedAt": "2026-06-06"
+  },
+  {
+    "id": "2025-electromagnetic-finals-draw-result",
+    "title": "第二十届全国大学生智能汽车竞赛全国总决赛预赛抽签结果",
+    "url": "https://blog.csdn.net/zhuoqingjoking97298/article/details/150106920",
+    "year": "2025",
+    "groups": [
+      "electromagnetic"
+    ],
+    "type": "official",
+    "topics": [
+      "rules",
+      "case-study"
+    ],
+    "level": "beginner",
+    "language": "zh-CN",
+    "description": "第20届全国总决赛预赛抽签结果，包含缩微电磁等组别的现场赛程安排和队伍出场顺序参考。",
+    "source": {
+      "platform": "csdn",
+      "author": "卓晴"
+    },
+    "tags": [
+      "全国总决赛",
+      "抽签结果",
+      "预赛",
+      "缩微电磁"
+    ],
+    "featured": false,
+    "createdAt": "2026-06-06",
+    "updatedAt": "2026-06-06"
+  },
+  {
+    "id": "2025-electromagnetic-anhui-results",
+    "title": "第二十届全国大学生智能汽车竞赛分赛区竞速比赛成绩与奖项：安徽赛区",
+    "url": "https://blog.csdn.net/zhuoqingjoking97298/article/details/149686157",
+    "year": "2025",
+    "groups": [
+      "electromagnetic"
+    ],
+    "type": "official",
+    "topics": [
+      "case-study",
+      "rules"
+    ],
+    "level": "beginner",
+    "language": "zh-CN",
+    "description": "第20届安徽赛区竞速比赛成绩与奖项公告，包含缩微电磁专科等项目结果，适合查询分赛区成绩和队伍表现。",
+    "source": {
+      "platform": "csdn",
+      "author": "卓晴"
+    },
+    "tags": [
+      "安徽赛区",
+      "成绩公告",
+      "缩微电磁",
+      "分赛区"
+    ],
+    "featured": false,
+    "createdAt": "2026-06-06",
+    "updatedAt": "2026-06-06"
+  },
+  {
+    "id": "2025-electromagnetic-west-results",
+    "title": "第二十届全国大学生智能汽车竞赛分赛区竞速比赛成绩与奖项：西部赛区",
+    "url": "https://blog.csdn.net/zhuoqingjoking97298/article/details/149686144",
+    "year": "2025",
+    "groups": [
+      "electromagnetic"
+    ],
+    "type": "official",
+    "topics": [
+      "case-study",
+      "rules"
+    ],
+    "level": "beginner",
+    "language": "zh-CN",
+    "description": "第20届西部赛区竞速比赛成绩与奖项公告，收录缩微电磁组获奖与成绩信息，可用于区域队伍复盘。",
+    "source": {
+      "platform": "csdn",
+      "author": "卓晴"
+    },
+    "tags": [
+      "西部赛区",
+      "成绩公告",
+      "缩微电磁",
+      "分赛区"
+    ],
+    "featured": false,
+    "createdAt": "2026-06-06",
+    "updatedAt": "2026-06-06"
+  },
+  {
+    "id": "2025-electromagnetic-south-results",
+    "title": "第二十届全国大学生智能汽车竞赛分赛区竞速比赛成绩与奖项：华南赛区",
+    "url": "https://blog.csdn.net/zhuoqingjoking97298/article/details/149686133",
+    "year": "2025",
+    "groups": [
+      "electromagnetic"
+    ],
+    "type": "official",
+    "topics": [
+      "case-study",
+      "rules"
+    ],
+    "level": "beginner",
+    "language": "zh-CN",
+    "description": "第20届华南赛区竞速比赛成绩与奖项公告，包含缩微电磁相关成绩信息，适合查阅赛区队伍表现。",
+    "source": {
+      "platform": "csdn",
+      "author": "卓晴"
+    },
+    "tags": [
+      "华南赛区",
+      "成绩公告",
+      "缩微电磁",
+      "分赛区"
+    ],
+    "featured": false,
+    "createdAt": "2026-06-06",
+    "updatedAt": "2026-06-06"
+  },
+  {
+    "id": "2025-electromagnetic-shandong-results",
+    "title": "第二十届全国大学生智能汽车竞赛分赛区竞速比赛成绩与奖项：山东赛区",
+    "url": "https://blog.csdn.net/zhuoqingjoking97298/article/details/149686173",
+    "year": "2025",
+    "groups": [
+      "electromagnetic"
+    ],
+    "type": "official",
+    "topics": [
+      "case-study",
+      "rules"
+    ],
+    "level": "beginner",
+    "language": "zh-CN",
+    "description": "第20届山东赛区竞速比赛成绩与奖项公告，包含缩微电磁等项目结果，可用于定位区域优秀队伍。",
+    "source": {
+      "platform": "csdn",
+      "author": "卓晴"
+    },
+    "tags": [
+      "山东赛区",
+      "成绩公告",
+      "缩微电磁",
+      "分赛区"
+    ],
+    "featured": false,
+    "createdAt": "2026-06-06",
+    "updatedAt": "2026-06-06"
+  },
+  {
+    "id": "2025-electromagnetic-xinjiang-results",
+    "title": "第二十届全国大学生智能汽车竞赛分赛区竞速比赛成绩与奖项：新疆赛区",
+    "url": "https://blog.csdn.net/zhuoqingjoking97298/article/details/149686217",
+    "year": "2025",
+    "groups": [
+      "electromagnetic"
+    ],
+    "type": "official",
+    "topics": [
+      "case-study",
+      "rules"
+    ],
+    "level": "beginner",
+    "language": "zh-CN",
+    "description": "第20届新疆赛区竞速比赛成绩与奖项公告，包含缩微电磁相关赛果，适合补充分赛区成绩索引。",
+    "source": {
+      "platform": "csdn",
+      "author": "卓晴"
+    },
+    "tags": [
+      "新疆赛区",
+      "成绩公告",
+      "缩微电磁",
+      "分赛区"
+    ],
+    "featured": false,
+    "createdAt": "2026-06-06",
+    "updatedAt": "2026-06-06"
+  },
+  {
+    "id": "2025-electromagnetic-zhejiang-results",
+    "title": "第二十届全国大学生智能汽车竞赛分赛区竞速比赛成绩与奖项：浙江赛区",
+    "url": "https://blog.csdn.net/zhuoqingjoking97298/article/details/149686184",
+    "year": "2025",
+    "groups": [
+      "electromagnetic"
+    ],
+    "type": "official",
+    "topics": [
+      "case-study",
+      "rules"
+    ],
+    "level": "beginner",
+    "language": "zh-CN",
+    "description": "第20届浙江赛区竞速比赛成绩与奖项公告，包含缩微电磁相关结果，可用于查看区域晋级和获奖情况。",
+    "source": {
+      "platform": "csdn",
+      "author": "卓晴"
+    },
+    "tags": [
+      "浙江赛区",
+      "成绩公告",
+      "缩微电磁",
+      "分赛区"
+    ],
+    "featured": false,
+    "createdAt": "2026-06-06",
+    "updatedAt": "2026-06-06"
+  },
+  {
+    "id": "2025-electromagnetic-east-results",
+    "title": "第二十届全国大学生智能汽车竞赛分赛区竞速比赛成绩与奖项：华东赛区",
+    "url": "https://blog.csdn.net/zhuoqingjoking97298/article/details/149686106",
+    "year": "2025",
+    "groups": [
+      "electromagnetic"
+    ],
+    "type": "official",
+    "topics": [
+      "case-study",
+      "rules"
+    ],
+    "level": "beginner",
+    "language": "zh-CN",
+    "description": "第20届华东赛区竞速比赛成绩与奖项公告，包含缩微电磁组相关赛果，适合汇总分赛区队伍表现。",
+    "source": {
+      "platform": "csdn",
+      "author": "卓晴"
+    },
+    "tags": [
+      "华东赛区",
+      "成绩公告",
+      "缩微电磁",
+      "分赛区"
+    ],
+    "featured": false,
+    "createdAt": "2026-06-06",
+    "updatedAt": "2026-06-06"
+  }
+]
