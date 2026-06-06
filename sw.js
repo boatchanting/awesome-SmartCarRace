@@ -1,5 +1,5 @@
-const CACHE_NAME = "smartcar-docs-v2";
-const PRECACHE = ["./", "index.html", "style.css?v=2", "main.js?v=2", "docs/manifest.json"];
+const CACHE_NAME = "smartcar-docs-v3";
+const PRECACHE = ["./", "index.html", "style.css?v=3", "main.js?v=3", "docs/manifest.json"];
 
 function isAppAsset(url) {
   return url.origin === self.location.origin

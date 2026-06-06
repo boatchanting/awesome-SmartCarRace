@@ -19,6 +19,7 @@
   const RESOURCE_INDEX_URL = "data/resources.index.json";
   const LEGACY_DATA_URL = "data/resources.json";
   const TAXONOMY_URL = "data/taxonomy.json";
+  const RESOURCE_DRAFTS_KEY = "smartcar-resource-drafts-v1";
   const DOC_FALLBACK_FILES = [
     "docs/intro.md",
     "docs/data-model.md",
@@ -76,11 +77,15 @@
     docsByPath: new Map(),
     manifestMeta: new Map(),
     fuse: null,
+    resourceFuse: null,
     activeDoc: null,
     headings: [],
+    baseResources: [],
+    resourceDrafts: [],
     resources: [],
     taxonomy: fallbackTaxonomy,
-    filters: { keyword: "", year: "", group: "", type: "", topic: "" }
+    filters: { keyword: "", year: "", group: "", type: "", topic: "" },
+    searchScopes: { docs: true, resources: true }
   };
 
   const $ = (selector, root = document) => root.querySelector(selector);
@@ -113,9 +118,13 @@
     searchInput: $("#doc-search"),
     searchResults: $("#search-results"),
     searchTrigger: $("#search-trigger"),
+    searchDocsScope: $("#search-scope-docs"),
+    searchResourcesScope: $("#search-scope-resources"),
     themeToggle: $("#theme-toggle"),
     mobileMenu: $("#mobile-menu"),
     collapseAll: $("#collapse-all"),
+    toggleSidebar: $("#toggle-sidebar"),
+    toggleToc: $("#toggle-toc"),
     backTop: $("#back-top"),
     imagePreview: $("#image-preview"),
     imageClose: $("#image-close"),
@@ -127,7 +136,22 @@
     topic: $("#topic-filter"),
     resultMeta: $("#result-meta"),
     stateMessage: $("#state-message"),
-    resourceList: $("#resource-list")
+    resourceList: $("#resource-list"),
+    resourceForm: $("#resource-form"),
+    resourceTitle: $("#resource-title"),
+    resourceUrl: $("#resource-url"),
+    resourceYear: $("#resource-year"),
+    resourceGroup: $("#resource-group"),
+    resourceType: $("#resource-type"),
+    resourceTopic: $("#resource-topic"),
+    resourceLevel: $("#resource-level"),
+    resourceSource: $("#resource-source"),
+    resourceTags: $("#resource-tags"),
+    resourceDescription: $("#resource-description"),
+    resourceFeatured: $("#resource-featured"),
+    resourceDraftMeta: $("#resource-draft-meta"),
+    exportResourceDrafts: $("#export-resource-drafts"),
+    clearResourceDrafts: $("#clear-resource-drafts")
   };
 
   const md = createMarkdownRenderer();
@@ -723,16 +747,85 @@
     setTimeout(() => els.searchInput.focus(), 30);
   }
 
+  function syncSearchScopes() {
+    state.searchScopes.docs = els.searchDocsScope.checked;
+    state.searchScopes.resources = els.searchResourcesScope.checked;
+    if (!state.searchScopes.docs && !state.searchScopes.resources) {
+      state.searchScopes.docs = true;
+      state.searchScopes.resources = true;
+      els.searchDocsScope.checked = true;
+      els.searchResourcesScope.checked = true;
+    }
+    runSearch(els.searchInput.value);
+  }
+
+  function getDocSearchResults(query) {
+    if (!state.searchScopes.docs) return [];
+    if (!query) return state.docs.slice(0, 6).map((doc) => ({ type: "doc", item: doc }));
+    return (state.fuse ? state.fuse.search(query) : [])
+      .slice(0, 8)
+      .map((result) => ({ type: "doc", item: result.item }));
+  }
+
+  function getResourceSearchResults(query) {
+    if (!state.searchScopes.resources) return [];
+    const source = query && state.resourceFuse
+      ? state.resourceFuse.search(query).map((result) => result.item)
+      : state.resources.filter((item) => item.featured).concat(state.resources.filter((item) => !item.featured));
+    return source.slice(0, 8).map((item) => ({ type: "resource", item }));
+  }
+
+  function buildResourceHref(item) {
+    if (!item.url) return "#/resources";
+    return isInternalDoc(item.url) ? `#/${item.url.replace(/^#\//, "")}` : item.url;
+  }
+
+  function renderDocSearchResult(doc, query) {
+    return `
+      <a class="search-result" href="${buildDocHash(doc.path)}" data-close-search>
+        <small>知识库 · ${escapeHtml(doc.stats.category)}</small>
+        <strong>${highlight(doc.title, query)}</strong>
+        <span>${highlight(doc.summary || doc.searchText.slice(0, 140), query)}</span>
+        <small>${doc.stats.tags.map((tag) => `#${escapeHtml(tag)}`).join(" ")}</small>
+      </a>
+    `;
+  }
+
+  function renderResourceSearchResult(item, query) {
+    const href = buildResourceHref(item);
+    const externalAttrs = item.url && !isInternalDoc(item.url) ? `target="_blank" rel="noreferrer"` : "";
+    return `
+      <a class="search-result resource-search-result" href="${escapeHtml(href)}" ${externalAttrs} data-close-search>
+        <small>资源 · ${escapeHtml([item.year, labelFor("resourceTypes", item.type)].filter(Boolean).join(" · "))}</small>
+        <strong>${highlight(item.title, query)}</strong>
+        <span>${highlight(item.description || item.source || "暂无简介。", query)}</span>
+        <small>${[...item.groups.map((id) => labelFor("groups", id)), ...item.topics.map((id) => labelFor("topics", id)), ...item.tags].filter(Boolean).map((tag) => `#${escapeHtml(tag)}`).join(" ")}</small>
+      </a>
+    `;
+  }
+
   function runSearch(query) {
     const trimmed = query.trim();
-    const docs = trimmed ? state.fuse.search(trimmed).map((result) => ({ doc: result.item, matches: result.matches })) : state.docs.slice(0, 8).map((doc) => ({ doc, matches: [] }));
-    els.searchResults.innerHTML = docs.length ? docs.slice(0, 12).map(({ doc }) => `
-      <a class="search-result" href="${buildDocHash(doc.path)}" data-close-search>
-        <strong>${highlight(doc.title, trimmed)}</strong>
-        <span>${highlight(doc.summary || doc.searchText.slice(0, 140), trimmed)}</span>
-        <small>${escapeHtml(doc.stats.category)} · ${doc.stats.tags.map((tag) => `#${escapeHtml(tag)}`).join(" ")}</small>
-      </a>
-    `).join("") : `<p class="empty">没有找到相关文档。</p>`;
+    const docs = getDocSearchResults(trimmed);
+    const resources = getResourceSearchResults(trimmed);
+    const sections = [];
+    if (state.searchScopes.docs) {
+      sections.push(`
+        <section class="search-section">
+          <h3>知识库</h3>
+          ${docs.length ? docs.map(({ item }) => renderDocSearchResult(item, trimmed)).join("") : `<p class="empty">没有找到相关文档。</p>`}
+        </section>
+      `);
+    }
+    if (state.searchScopes.resources) {
+      sections.push(`
+        <section class="search-section">
+          <h3>资源</h3>
+          ${resources.length ? resources.map(({ item }) => renderResourceSearchResult(item, trimmed)).join("") : `<p class="empty">没有找到相关资源。</p>`}
+        </section>
+      `);
+    }
+    els.searchResults.innerHTML = sections.join("");
   }
 
   function highlight(text, query) {
@@ -747,12 +840,47 @@
     return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
 
+  function setSidebarCollapsed(collapsed, persist = true) {
+    els.body.classList.toggle("sidebar-collapsed", collapsed);
+    if (els.toggleSidebar) {
+      els.toggleSidebar.setAttribute("aria-pressed", String(collapsed));
+      els.toggleSidebar.innerHTML = collapsed
+        ? `<i class="fa-solid fa-table-list"></i><span>显示文件树</span>`
+        : `<i class="fa-solid fa-table-list"></i><span>隐藏文件树</span>`;
+    }
+    if (collapsed) {
+      els.sidebar.classList.remove("open");
+      els.mobileMenu.setAttribute("aria-expanded", "false");
+    }
+    if (persist) localStorage.setItem("doc-sidebar-collapsed", collapsed ? "1" : "0");
+  }
+
+  function setTocCollapsed(collapsed, persist = true) {
+    els.body.classList.toggle("toc-collapsed", collapsed);
+    if (els.toggleToc) {
+      els.toggleToc.setAttribute("aria-pressed", String(collapsed));
+      els.toggleToc.innerHTML = collapsed
+        ? `<i class="fa-solid fa-list-ul"></i><span>显示目录</span>`
+        : `<i class="fa-solid fa-list-ul"></i><span>隐藏目录</span>`;
+    }
+    if (persist) localStorage.setItem("doc-toc-collapsed", collapsed ? "1" : "0");
+  }
+
+  function applyLayoutPreferences() {
+    setSidebarCollapsed(localStorage.getItem("doc-sidebar-collapsed") === "1", false);
+    setTocCollapsed(localStorage.getItem("doc-toc-collapsed") === "1", false);
+  }
+
   function showView(name) {
     els.home.hidden = name !== "home";
     els.resources.hidden = name !== "resources";
     els.doc.hidden = name !== "doc";
     els.tocPanel.hidden = name !== "doc";
     document.body.dataset.view = name;
+    if (name !== "doc") {
+      els.sidebar.classList.remove("open");
+      els.mobileMenu.setAttribute("aria-expanded", "false");
+    }
     $$("[data-route]").forEach((link) => link.classList.toggle("active", link.dataset.route === name || (name === "doc" && link.dataset.route === "docs")));
   }
 
@@ -840,7 +968,7 @@
     return [source.platform, source.author].filter(Boolean).join(" / ");
   }
 
-  function normalizeResource(item, index) {
+  function normalizeResource(item, index, options = {}) {
     return {
       id: item.id || `resource-${index}`,
       title: item.title || "未命名资源",
@@ -853,8 +981,223 @@
       description: item.description || "",
       tags: normalizeArray(item.tags),
       featured: Boolean(item.featured),
-      source: normalizeSource(item.source || item.author)
+      source: normalizeSource(item.source || item.author),
+      language: item.language || "zh-CN",
+      createdAt: item.createdAt || "",
+      updatedAt: item.updatedAt || "",
+      local: Boolean(options.local),
+      searchText: ""
     };
+  }
+
+  function loadRawResourceDrafts() {
+    try {
+      const payload = JSON.parse(localStorage.getItem(RESOURCE_DRAFTS_KEY) || "[]");
+      return Array.isArray(payload) ? payload.filter((item) => item && typeof item === "object") : [];
+    } catch {
+      return [];
+    }
+  }
+
+  function saveRawResourceDrafts(drafts) {
+    localStorage.setItem(RESOURCE_DRAFTS_KEY, JSON.stringify(drafts, null, 2));
+  }
+
+  function loadResourceDrafts() {
+    return loadRawResourceDrafts().map((item, index) => normalizeResource(item, `draft-${index}`, { local: true }));
+  }
+
+  function mergeResources() {
+    state.resources = [...state.baseResources, ...state.resourceDrafts];
+    state.resources.forEach((item) => {
+      item.searchText = getSearchText(item);
+    });
+    rebuildResourceFuse();
+    updateResourceDraftMeta();
+  }
+
+  function rebuildResourceFuse() {
+    state.resourceFuse = typeof Fuse === "function"
+      ? new Fuse(state.resources, {
+        threshold: 0.32,
+        ignoreLocation: true,
+        minMatchCharLength: 1,
+        keys: [
+          { name: "title", weight: 0.3 },
+          { name: "description", weight: 0.22 },
+          { name: "searchText", weight: 0.28 },
+          { name: "source", weight: 0.1 },
+          { name: "tags", weight: 0.1 }
+        ]
+      })
+      : null;
+  }
+
+  function todayString() {
+    return new Date().toISOString().slice(0, 10);
+  }
+
+  function splitList(value) {
+    return [...new Set(String(value || "")
+      .split(/[，,]/)
+      .map((item) => item.trim())
+      .filter(Boolean))];
+  }
+
+  function slugifyId(value) {
+    return String(value || "")
+      .normalize("NFKD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/-+/g, "-")
+      .replace(/^-|-$/g, "");
+  }
+
+  function hashIdSeed(value) {
+    let hash = 0;
+    String(value || "").split("").forEach((char) => {
+      hash = ((hash * 31) + char.charCodeAt(0)) >>> 0;
+    });
+    return hash.toString(36);
+  }
+
+  function inferPlatform(type, url) {
+    if (type) return type;
+    try {
+      return new URL(url).hostname.replace(/^www\./, "").split(".")[0] || "web";
+    } catch {
+      return "web";
+    }
+  }
+
+  function createResourceId(payload) {
+    const fallback = slugifyId(new URL(payload.url).hostname.replace(/^www\./, "").split(".")[0]);
+    const seed = slugifyId(payload.title) || fallback || "resource";
+    const base = slugifyId([payload.year, payload.groups[0], payload.type, seed, hashIdSeed(`${payload.title}${payload.url}`).slice(0, 5)].filter(Boolean).join("-"));
+    const used = new Set(state.resources.map((item) => item.id));
+    let id = base;
+    let suffix = 2;
+    while (used.has(id)) {
+      id = `${base}-${suffix}`;
+      suffix += 1;
+    }
+    return id;
+  }
+
+  function readResourceForm() {
+    const title = els.resourceTitle.value.trim();
+    const url = els.resourceUrl.value.trim();
+    const year = els.resourceYear.value;
+    const group = els.resourceGroup.value;
+    const type = els.resourceType.value;
+    const topic = els.resourceTopic.value;
+    const level = els.resourceLevel.value || "beginner";
+    const sourceAuthor = els.resourceSource.value.trim() || "待补充";
+    const description = els.resourceDescription.value.trim() || `${title} 的资料链接，待补充详细简介。`;
+    const tags = splitList(els.resourceTags.value);
+    const date = todayString();
+    const payload = {
+      title,
+      url,
+      year,
+      groups: [group],
+      type,
+      topics: [topic],
+      level,
+      language: "zh-CN",
+      description,
+      source: {
+        platform: inferPlatform(type, url),
+        author: sourceAuthor
+      },
+      tags,
+      featured: els.resourceFeatured.checked,
+      createdAt: date,
+      updatedAt: date
+    };
+    payload.id = createResourceId(payload);
+    return payload;
+  }
+
+  function isHttpUrl(value) {
+    try {
+      const parsed = new URL(value);
+      return parsed.protocol === "http:" || parsed.protocol === "https:";
+    } catch {
+      return false;
+    }
+  }
+
+  function updateResourceDraftMeta() {
+    if (!els.resourceDraftMeta) return;
+    const count = state.resourceDrafts.length;
+    els.resourceDraftMeta.textContent = count ? `本地新增 ${count} 条` : "暂无本地新增";
+    els.exportResourceDrafts.disabled = count === 0;
+    els.clearResourceDrafts.disabled = count === 0;
+  }
+
+  function hydrateResourceForm() {
+    if (!els.resourceForm) return;
+    fillSelect(els.resourceYear, state.taxonomy.years || [], "选择年份");
+    fillSelect(els.resourceGroup, state.taxonomy.groups || [], "选择组别");
+    fillSelect(els.resourceType, state.taxonomy.resourceTypes || [], "选择类型");
+    fillSelect(els.resourceTopic, state.taxonomy.topics || [], "选择主题");
+    fillSelect(els.resourceLevel, state.taxonomy.levels || [], "选择难度");
+  }
+
+  function clearResourceFormText() {
+    els.resourceTitle.value = "";
+    els.resourceUrl.value = "";
+    els.resourceSource.value = "";
+    els.resourceTags.value = "";
+    els.resourceDescription.value = "";
+    els.resourceFeatured.checked = false;
+    els.resourceTitle.focus();
+  }
+
+  function addResourceDraft(event) {
+    event.preventDefault();
+    if (!els.resourceForm.reportValidity()) return;
+    if (!isHttpUrl(els.resourceUrl.value.trim())) {
+      els.resourceUrl.setCustomValidity("请输入 http 或 https 链接");
+      els.resourceUrl.reportValidity();
+      els.resourceUrl.setCustomValidity("");
+      return;
+    }
+    const draft = readResourceForm();
+    const drafts = loadRawResourceDrafts();
+    drafts.push(draft);
+    saveRawResourceDrafts(drafts);
+    state.resourceDrafts = loadResourceDrafts();
+    mergeResources();
+    hydrateFilters();
+    renderResources();
+    clearResourceFormText();
+  }
+
+  function exportResourceDrafts() {
+    const drafts = loadRawResourceDrafts();
+    if (!drafts.length) return;
+    const blob = new Blob([JSON.stringify(drafts, null, 2)], { type: "application/json" });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.href = url;
+    link.download = `resources-drafts-${todayString()}.json`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 0);
+  }
+
+  function clearResourceDrafts() {
+    if (!state.resourceDrafts.length) return;
+    if (!window.confirm("清空本地新增资源？")) return;
+    localStorage.removeItem(RESOURCE_DRAFTS_KEY);
+    state.resourceDrafts = [];
+    mergeResources();
+    hydrateFilters();
+    renderResources();
   }
 
   function fillSelect(select, options, label) {
@@ -922,6 +1265,7 @@
         <article class="resource-card">
           <div class="card-topline">
             ${item.year ? `<span>${escapeHtml(item.year)}</span>` : ""}
+            ${item.local ? `<span class="pill local">本地新增</span>` : ""}
             ${item.featured ? `<span class="pill featured">精选</span>` : ""}
             ${renderPills(item.groups, "groups")}
             ${item.type ? `<span class="pill">${escapeHtml(labelFor("resourceTypes", item.type))}</span>` : ""}
@@ -956,15 +1300,21 @@
     try {
       const [rawTaxonomy, list] = await Promise.all([fetchJson(TAXONOMY_URL).catch(() => fallbackTaxonomy), loadResourcePayloads()]);
       state.taxonomy = { ...fallbackTaxonomy, ...rawTaxonomy };
-      state.resources = list.map(normalizeResource);
+      state.baseResources = list.map((item, index) => normalizeResource(item, index));
+      state.resourceDrafts = loadResourceDrafts();
+      mergeResources();
       els.stateMessage.hidden = true;
     } catch (error) {
       state.taxonomy = fallbackTaxonomy;
+      state.baseResources = [];
+      state.resourceDrafts = loadResourceDrafts();
       state.resources = [];
+      mergeResources();
       els.stateMessage.hidden = false;
       els.stateMessage.textContent = "未能读取资源分片。请通过本地静态服务器或 GitHub Pages 访问，并确认 data/resources.index.json 存在。";
     }
     hydrateFilters();
+    hydrateResourceForm();
     renderResources();
   }
 
@@ -1006,11 +1356,16 @@
     els.searchTrigger.addEventListener("click", () => openSearch());
     $$('[data-open-search]').forEach((button) => button.addEventListener("click", () => openSearch()));
     els.searchInput.addEventListener("input", (event) => runSearch(event.target.value));
+    els.searchDocsScope.addEventListener("change", syncSearchScopes);
+    els.searchResourcesScope.addEventListener("change", syncSearchScopes);
     els.searchResults.addEventListener("click", (event) => {
       if (event.target.closest("[data-close-search]")) els.searchDialog.close();
     });
     els.themeToggle.addEventListener("click", toggleTheme);
+    els.toggleSidebar.addEventListener("click", () => setSidebarCollapsed(!els.body.classList.contains("sidebar-collapsed")));
+    els.toggleToc.addEventListener("click", () => setTocCollapsed(!els.body.classList.contains("toc-collapsed")));
     els.mobileMenu.addEventListener("click", () => {
+      if (els.body.classList.contains("sidebar-collapsed")) return;
       const open = els.sidebar.classList.toggle("open");
       els.mobileMenu.setAttribute("aria-expanded", String(open));
     });
@@ -1020,10 +1375,14 @@
     els.imagePreview.addEventListener("click", (event) => { if (event.target === els.imagePreview) closeImagePreview(); });
     els.filters.addEventListener("input", syncFiltersFromForm);
     els.filters.addEventListener("change", syncFiltersFromForm);
+    els.resourceForm.addEventListener("submit", addResourceDraft);
+    els.exportResourceDrafts.addEventListener("click", exportResourceDrafts);
+    els.clearResourceDrafts.addEventListener("click", clearResourceDrafts);
   }
 
   async function init() {
     applyTheme();
+    applyLayoutPreferences();
     bindEvents();
     await Promise.all([loadDocs(), loadResources()]);
     renderFileTree();

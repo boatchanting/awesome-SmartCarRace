@@ -59,6 +59,13 @@ docs/
 
 资源数据按 `data/resources/{年份}/{组别}/resources.json` 拆分维护。新增分片后，需要把文件路径加入 `data/resources.index.json`，否则 GitHub Pages 前端无法自动发现该文件。
 
+也可以在网站“资源”页面使用“添加资源”表单先录入资料。页面会把新增内容保存在当前浏览器，点击“导出 JSON”后，可用下面的命令合并到对应资源分片：
+
+```bash
+node scripts/import-resource-drafts.js resources-drafts-YYYY-MM-DD.json
+node scripts/validate-resources.js
+```
+
 ## 后续网站能力
 
 计划支持：

@@ -19,6 +19,23 @@ docs(ai): 更新 AI 视觉组资料索引
 refactor(groups): 重构组别文档目录结构
 ```
 
+```bash
+feat(repo): 优化站点界面并新增资源录入系统
+
+- feat(ui): 首页和资源页默认隐藏文件树，文档页支持隐藏文件树和文章目录
+- feat(search): 搜索弹窗支持选择知识库、资源或全部范围
+- feat(resources): 资源页新增资源添加表单，支持本地暂存、即时展示和 JSON 导出
+- feat(scripts): 新增资源草稿导入脚本，按年份和组别合并资源分片
+- docs(readme): 补充资源草稿导入和校验说明
+- fix(resources): 补充 open-hardware 主题枚举，修复资源校验失败
+- fix(sw): 更新缓存版本，确保新样式和脚本生效
+
+验证：
+- node --check main.js
+- node --check scripts/import-resource-drafts.js
+- node scripts/validate-resources.js
+```
+
 ---
 
 # Commit Type（提交类型）

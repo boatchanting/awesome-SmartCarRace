@@ -90,6 +90,10 @@
       "name": "硬件电路"
     },
     {
+      "id": "open-hardware",
+      "name": "开源硬件"
+    },
+    {
       "id": "control",
       "name": "控制算法"
     },
