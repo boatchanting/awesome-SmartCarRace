@@ -4,9 +4,15 @@
     "title": "平衡轮腿组之可达鸭思路浅析：单边桥控制",
     "url": "https://blog.csdn.net/zhuoqingjoking97298/article/details/146122467",
     "year": "2025",
-    "groups": ["balance-wheel-leg"],
+    "groups": [
+      "balance-wheel-leg"
+    ],
     "type": "csdn",
-    "topics": ["control", "mechanical", "case-study"],
+    "topics": [
+      "control",
+      "mechanical",
+      "case-study"
+    ],
     "level": "intermediate",
     "language": "zh-CN",
     "description": "面向智能车平衡轮腿组的单边桥控制思路文章，适合整理轮腿姿态、过桥动作和控制策略时参考。",
@@ -14,199 +20,30 @@
       "platform": "csdn",
       "author": "可达鸭"
     },
-    "tags": ["平衡轮腿", "单边桥", "控制策略", "第20届"],
+    "tags": [
+      "平衡轮腿",
+      "单边桥",
+      "控制策略",
+      "第20届"
+    ],
     "featured": true,
     "createdAt": "2026-05-27",
     "updatedAt": "2026-05-27"
-  },
-  {
-    "id": "2025-balance-wheel-leg-official-rules",
-    "title": "第二十届全国大学生智能汽车竞速比赛规则",
-    "url": "https://blog.csdn.net/zhuoqingjoking97298/article/details/143673441",
-    "year": "2025",
-    "groups": ["balance-wheel-leg"],
-    "type": "official",
-    "topics": ["rules"],
-    "level": "beginner",
-    "language": "zh-CN",
-    "description": "第二十届智能车竞速赛总规则，包含平衡轮腿组的赛题任务、车模平台、主控要求、赛道元素和竞赛组织说明。",
-    "source": {
-      "platform": "csdn",
-      "author": "卓晴"
-    },
-    "tags": ["第20届", "竞赛规则", "平衡轮腿", "官方规则"],
-    "featured": true,
-    "createdAt": "2026-06-06",
-    "updatedAt": "2026-06-06"
-  },
-  {
-    "id": "2025-balance-wheel-leg-car-platform",
-    "title": "第二十届全国大学生智能汽车竞赛车模平台",
-    "url": "https://www.eet-china.com/mp/a364181.html",
-    "year": "2025",
-    "groups": ["balance-wheel-leg"],
-    "type": "official",
-    "topics": ["mechanical", "rules"],
-    "level": "beginner",
-    "language": "zh-CN",
-    "description": "组委会发布的第20届车模平台说明，覆盖轮腿等指定车模平台、供应商信息和允许改装范围。",
-    "source": {
-      "platform": "eet-china",
-      "author": "TsinghuaJoking"
-    },
-    "tags": ["车模平台", "轮腿车模", "机械结构", "第20届"],
-    "featured": true,
-    "createdAt": "2026-06-06",
-    "updatedAt": "2026-06-06"
-  },
-  {
-    "id": "2025-balance-wheel-leg-infineon-chip-support",
-    "title": "第20届全国大学生智能汽车竞赛英飞凌芯片支持计划",
-    "url": "https://community.infineon.com/t5/%E6%8A%80%E6%9C%AF%E7%A4%BE%E5%8C%BA%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E7%AC%AC20%E5%B1%8A%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%99%BA%E8%83%BD%E6%B1%BD%E8%BD%A6%E7%AB%9E%E8%B5%9B-%E8%8B%B1%E9%A3%9E%E5%87%8C%E8%8A%AF%E7%89%87%E6%94%AF%E6%8C%81%E8%AE%A1%E5%88%92/ba-p/924164",
-    "year": "2025",
-    "groups": ["balance-wheel-leg"],
-    "type": "official",
-    "topics": ["hardware", "embedded", "rules"],
-    "level": "beginner",
-    "language": "zh-CN",
-    "description": "英飞凌官方社区发布的第20届芯片支持计划，说明AURIX TC264、TRAVEO CYT2BL3等器件申请与使用范围。",
-    "source": {
-      "platform": "infineon-community",
-      "author": "Infineon Developer Community"
-    },
-    "tags": ["英飞凌", "TC264", "CYT2BL3", "芯片支持"],
-    "featured": true,
-    "createdAt": "2026-06-06",
-    "updatedAt": "2026-06-06"
-  },
-  {
-    "id": "2025-balance-wheel-leg-st-chip-support",
-    "title": "第20届全国大学生智能汽车竞赛意法半导体芯片支持计划",
-    "url": "https://blog.csdn.net/zhuoqingjoking97298/article/details/145804537",
-    "year": "2025",
-    "groups": ["balance-wheel-leg"],
-    "type": "official",
-    "topics": ["hardware", "embedded", "rules"],
-    "level": "beginner",
-    "language": "zh-CN",
-    "description": "第20届ST芯片支持计划，说明推荐平衡轮腿组等使用的ToF传感器型号和样片申请流程。",
-    "source": {
-      "platform": "csdn",
-      "author": "卓晴"
-    },
-    "tags": ["ST", "ToF", "传感器", "VL53L1CX"],
-    "featured": false,
-    "createdAt": "2026-06-06",
-    "updatedAt": "2026-06-06"
-  },
-  {
-    "id": "2025-balance-wheel-leg-referee-handbook",
-    "title": "第二十届全国大学生智能汽车竞赛裁判员手册",
-    "url": "https://www.eet-china.com/mp/a417379.html",
-    "year": "2025",
-    "groups": ["balance-wheel-leg"],
-    "type": "official",
-    "topics": ["rules", "case-study"],
-    "level": "intermediate",
-    "language": "zh-CN",
-    "description": "面向现场裁判和参赛队公开的第20届裁判员手册，适合核对比赛流程、判罚标准、车模检查与现场执行口径。",
-    "source": {
-      "platform": "eet-china",
-      "author": "TsinghuaJoking"
-    },
-    "tags": ["裁判员手册", "比赛流程", "判罚标准", "车检"],
-    "featured": false,
-    "createdAt": "2026-06-06",
-    "updatedAt": "2026-06-06"
-  },
-  {
-    "id": "2025-balance-wheel-leg-finals-track-design",
-    "title": "第二十届全国大学生智能汽车竞赛全国总决赛赛道设计",
-    "url": "https://blog.csdn.net/zhuoqingjoking97298/article/details/150069858",
-    "year": "2025",
-    "groups": ["balance-wheel-leg"],
-    "type": "official",
-    "topics": ["rules", "mechanical", "case-study"],
-    "level": "intermediate",
-    "language": "zh-CN",
-    "description": "第20届全国总决赛赛道设计文档，包含平衡轮腿赛道预赛和决赛布置示意，适合复盘赛道元素与调试场景。",
-    "source": {
-      "platform": "csdn",
-      "author": "卓晴"
-    },
-    "tags": ["总决赛", "赛道设计", "预赛赛道", "决赛赛道"],
-    "featured": true,
-    "createdAt": "2026-06-06",
-    "updatedAt": "2026-06-06"
-  },
-  {
-    "id": "2025-balance-wheel-leg-tech-report-requirements",
-    "title": "第二十届全国大学生智能汽车竞赛技术报告要求细则",
-    "url": "https://www.eet-china.com/mp/a426507.html",
-    "year": "2025",
-    "groups": ["balance-wheel-leg"],
-    "type": "official",
-    "topics": ["rules", "case-study"],
-    "level": "beginner",
-    "language": "zh-CN",
-    "description": "第20届总决赛技术报告写作与评审要求，适合准备平衡轮腿组报告结构、技术方案描述和研究论文部分。",
-    "source": {
-      "platform": "eet-china",
-      "author": "TsinghuaJoking"
-    },
-    "tags": ["技术报告", "报告要求", "总决赛", "论文集"],
-    "featured": false,
-    "createdAt": "2026-06-06",
-    "updatedAt": "2026-06-06"
-  },
-  {
-    "id": "2025-balance-wheel-leg-awards-list",
-    "title": "第二十届全国大学生智能汽车竞赛全国总决赛获奖名单",
-    "url": "https://blog.csdn.net/zhuoqingjoking97298/article/details/150608374",
-    "year": "2025",
-    "groups": ["balance-wheel-leg"],
-    "type": "official",
-    "topics": ["case-study", "rules"],
-    "level": "beginner",
-    "language": "zh-CN",
-    "description": "第20届全国总决赛获奖名单，包含平衡轮腿组获奖队伍和成绩信息，适合定位优秀队伍与赛后复盘。",
-    "source": {
-      "platform": "csdn",
-      "author": "卓晴"
-    },
-    "tags": ["获奖名单", "全国总决赛", "平衡轮腿", "成绩复盘"],
-    "featured": false,
-    "createdAt": "2026-06-06",
-    "updatedAt": "2026-06-06"
-  },
-  {
-    "id": "2025-balance-wheel-leg-tech-report-collection",
-    "title": "第二十届全国大学生智能汽车竞赛技术报告合集",
-    "url": "https://blog.csdn.net/zhuoqingjoking97298/article/details/151355375",
-    "year": "2025",
-    "groups": ["balance-wheel-leg"],
-    "type": "dataset",
-    "topics": ["case-study", "control", "mechanical", "hardware"],
-    "level": "advanced",
-    "language": "zh-CN",
-    "description": "第20届智能车竞赛技术报告汇总页，列出平衡轮腿等组别报告资源入口，适合赛后学习优秀队伍方案。",
-    "source": {
-      "platform": "csdn",
-      "author": "卓晴"
-    },
-    "tags": ["技术报告", "报告合集", "优秀方案", "赛后资料"],
-    "featured": true,
-    "createdAt": "2026-06-06",
-    "updatedAt": "2026-06-06"
   },
   {
     "id": "2025-balance-wheel-leg-bilibili-seekfree-early-run",
     "title": "第20届平衡轮腿组浅跑测试视频",
     "url": "https://www.bilibili.com/video/BV17rNxezEmv/",
     "year": "2025",
-    "groups": ["balance-wheel-leg"],
+    "groups": [
+      "balance-wheel-leg"
+    ],
     "type": "bilibili",
-    "topics": ["control", "mechanical", "case-study"],
+    "topics": [
+      "control",
+      "mechanical",
+      "case-study"
+    ],
     "level": "beginner",
     "language": "zh-CN",
     "description": "逐飞科技发布的平衡轮腿组演示车模浅跑测试视频，可直观看到前期性能验证和车模基本运动状态。",
@@ -214,7 +51,12 @@
       "platform": "bilibili",
       "author": "逐飞科技"
     },
-    "tags": ["浅跑测试", "逐飞科技", "演示车模", "视频"],
+    "tags": [
+      "浅跑测试",
+      "逐飞科技",
+      "演示车模",
+      "视频"
+    ],
     "featured": false,
     "createdAt": "2026-06-06",
     "updatedAt": "2026-06-06"
@@ -224,9 +66,16 @@
     "title": "第20届平衡轮腿组演示车模运行演示视频",
     "url": "https://www.bilibili.com/video/BV1rv9yYKE6U/",
     "year": "2025",
-    "groups": ["balance-wheel-leg"],
+    "groups": [
+      "balance-wheel-leg"
+    ],
     "type": "bilibili",
-    "topics": ["control", "vision", "mechanical", "case-study"],
+    "topics": [
+      "control",
+      "vision",
+      "mechanical",
+      "case-study"
+    ],
     "level": "beginner",
     "language": "zh-CN",
     "description": "逐飞科技发布的第20届平衡轮腿组演示车模运行视频，展示轮腿车模循迹和整体运行效果。",
@@ -234,7 +83,12 @@
       "platform": "bilibili",
       "author": "逐飞科技"
     },
-    "tags": ["运行演示", "逐飞科技", "演示车模", "视频"],
+    "tags": [
+      "运行演示",
+      "逐飞科技",
+      "演示车模",
+      "视频"
+    ],
     "featured": true,
     "createdAt": "2026-06-06",
     "updatedAt": "2026-06-06"
@@ -244,9 +98,15 @@
     "title": "第20届平衡轮腿组逐飞演示车模前期验证",
     "url": "https://mp.weixin.qq.com/s/xtHcXiOZAAx4XmkLTlk8vQ",
     "year": "2025",
-    "groups": ["balance-wheel-leg"],
+    "groups": [
+      "balance-wheel-leg"
+    ],
     "type": "wechat",
-    "topics": ["control", "mechanical", "case-study"],
+    "topics": [
+      "control",
+      "mechanical",
+      "case-study"
+    ],
     "level": "intermediate",
     "language": "zh-CN",
     "description": "逐飞科技平衡轮腿组演示车模前期验证文章，围绕性能验证和样车调试思路展开，适合早期方案参考。",
@@ -254,7 +114,12 @@
       "platform": "wechat",
       "author": "逐飞科技"
     },
-    "tags": ["前期验证", "逐飞科技", "性能验证", "平衡轮腿"],
+    "tags": [
+      "前期验证",
+      "逐飞科技",
+      "性能验证",
+      "平衡轮腿"
+    ],
     "featured": false,
     "createdAt": "2026-06-06",
     "updatedAt": "2026-06-06"
@@ -264,9 +129,16 @@
     "title": "第20届智能车平衡轮腿组演示车模浅析",
     "url": "https://mp.weixin.qq.com/s/AwHOXOwt8G0TGqKKPaox1A",
     "year": "2025",
-    "groups": ["balance-wheel-leg"],
+    "groups": [
+      "balance-wheel-leg"
+    ],
     "type": "wechat",
-    "topics": ["control", "vision", "mechanical", "case-study"],
+    "topics": [
+      "control",
+      "vision",
+      "mechanical",
+      "case-study"
+    ],
     "level": "intermediate",
     "language": "zh-CN",
     "description": "逐飞科技平衡轮腿组演示车模浅析，关键词包括姿态解算、平衡控制和摄像头循迹，适合复现样车方案前阅读。",
@@ -274,28 +146,13 @@
       "platform": "wechat",
       "author": "逐飞科技"
     },
-    "tags": ["姿态解算", "平衡控制", "摄像头循迹", "逐飞科技"],
+    "tags": [
+      "姿态解算",
+      "平衡控制",
+      "摄像头循迹",
+      "逐飞科技"
+    ],
     "featured": true,
-    "createdAt": "2026-06-06",
-    "updatedAt": "2026-06-06"
-  },
-  {
-    "id": "2025-balance-wheel-leg-seekfree-demo-index",
-    "title": "逐飞科技第二十届智能车演示车模索引",
-    "url": "https://seekfree.com.cn/%E5%BE%AE%E4%BF%A1%E6%8E%A8%E6%96%87/%E6%BC%94%E7%A4%BA%E8%BD%A6%E6%A8%A1/",
-    "year": "2025",
-    "groups": ["balance-wheel-leg"],
-    "type": "article",
-    "topics": ["case-study", "control", "mechanical"],
-    "level": "beginner",
-    "language": "zh-CN",
-    "description": "逐飞科技整理的演示车模索引页，集中收录第20届平衡轮腿组前期验证和演示车模浅析入口。",
-    "source": {
-      "platform": "seekfree",
-      "author": "逐飞科技"
-    },
-    "tags": ["资源索引", "演示车模", "逐飞科技", "第二十届"],
-    "featured": false,
     "createdAt": "2026-06-06",
     "updatedAt": "2026-06-06"
   },
@@ -304,9 +161,16 @@
     "title": "第二十届智能车竞赛英飞凌逐飞联合直播平衡轮腿组专题分享",
     "url": "https://www.eet-china.com/mp/a385785.html",
     "year": "2025",
-    "groups": ["balance-wheel-leg"],
+    "groups": [
+      "balance-wheel-leg"
+    ],
     "type": "article",
-    "topics": ["embedded", "hardware", "control", "mechanical"],
+    "topics": [
+      "embedded",
+      "hardware",
+      "control",
+      "mechanical"
+    ],
     "level": "intermediate",
     "language": "zh-CN",
     "description": "英飞凌与逐飞联合直播的平衡轮腿组专题分享，覆盖英飞凌MCU、无刷驱动、V车控制、跳跃和单边桥等内容。",
@@ -314,7 +178,12 @@
       "platform": "eet-china",
       "author": "TsinghuaJoking"
     },
-    "tags": ["英飞凌", "逐飞科技", "专题直播", "无刷驱动"],
+    "tags": [
+      "英飞凌",
+      "逐飞科技",
+      "专题直播",
+      "无刷驱动"
+    ],
     "featured": true,
     "createdAt": "2026-06-06",
     "updatedAt": "2026-06-06"
@@ -324,9 +193,16 @@
     "title": "第20届平衡轮腿组可达鸭思路浅析：LQR控制建模",
     "url": "https://blog.csdn.net/zhuoqingjoking97298/article/details/146120519",
     "year": "2025",
-    "groups": ["balance-wheel-leg"],
+    "groups": [
+      "balance-wheel-leg"
+    ],
     "type": "csdn",
-    "topics": ["control", "simulation", "mechanical", "case-study"],
+    "topics": [
+      "control",
+      "simulation",
+      "mechanical",
+      "case-study"
+    ],
     "level": "advanced",
     "language": "zh-CN",
     "description": "可达鸭平衡轮腿组备赛思路文章，重点介绍LQR控制、车轮与车体建模、状态空间表达和演示车模运行思路。",
@@ -334,7 +210,12 @@
       "platform": "csdn",
       "author": "卓晴"
     },
-    "tags": ["可达鸭", "LQR", "建模", "平衡控制"],
+    "tags": [
+      "可达鸭",
+      "LQR",
+      "建模",
+      "平衡控制"
+    ],
     "featured": true,
     "createdAt": "2026-06-06",
     "updatedAt": "2026-06-06"
@@ -344,9 +225,15 @@
     "title": "平衡轮腿组之可达鸭思路浅析：跳跃浅析",
     "url": "https://blog.csdn.net/zhuoqingjoking97298/article/details/146122256",
     "year": "2025",
-    "groups": ["balance-wheel-leg"],
+    "groups": [
+      "balance-wheel-leg"
+    ],
     "type": "csdn",
-    "topics": ["control", "mechanical", "case-study"],
+    "topics": [
+      "control",
+      "mechanical",
+      "case-study"
+    ],
     "level": "advanced",
     "language": "zh-CN",
     "description": "可达鸭围绕平衡轮腿组跳跃控制的思路文章，讨论起跳、空中姿态控制、离地判断和落地切换等关键问题。",
@@ -354,7 +241,12 @@
       "platform": "csdn",
       "author": "卓晴"
     },
-    "tags": ["可达鸭", "跳跃控制", "空中姿态", "轮腿控制"],
+    "tags": [
+      "可达鸭",
+      "跳跃控制",
+      "空中姿态",
+      "轮腿控制"
+    ],
     "featured": true,
     "createdAt": "2026-06-06",
     "updatedAt": "2026-06-06"
@@ -364,9 +256,15 @@
     "title": "CYT2BL3双路有感FOC驱动开源硬件",
     "url": "https://oshwhub.com/202-0202/zhi-neng-che-foc-qu-dong-jian-rong-zhu-fei-ku",
     "year": "2025",
-    "groups": ["balance-wheel-leg"],
+    "groups": [
+      "balance-wheel-leg"
+    ],
     "type": "open-hardware",
-    "topics": ["hardware", "embedded", "open-hardware"],
+    "topics": [
+      "hardware",
+      "embedded",
+      "open-hardware"
+    ],
     "level": "intermediate",
     "language": "zh-CN",
     "description": "立创开源硬件上的CYT2BL3双路有感FOC驱动板，说明可用于第20届轮腿组比赛的无刷驱动方案。",
@@ -374,7 +272,12 @@
       "platform": "oshwhub",
       "author": "kepler1072"
     },
-    "tags": ["CYT2BL3", "FOC", "无刷驱动", "立创开源"],
+    "tags": [
+      "CYT2BL3",
+      "FOC",
+      "无刷驱动",
+      "立创开源"
+    ],
     "featured": true,
     "createdAt": "2026-06-06",
     "updatedAt": "2026-06-06"
@@ -384,9 +287,16 @@
     "title": "第20届大学生智能汽车竞赛平衡轮腿组国二开源硬件",
     "url": "https://oshwhub.com/photoelectric-giant/zhi-neng-che-di-liu-ban-_2025-07-26",
     "year": "2025",
-    "groups": ["balance-wheel-leg"],
+    "groups": [
+      "balance-wheel-leg"
+    ],
     "type": "open-hardware",
-    "topics": ["hardware", "mechanical", "open-hardware", "case-study"],
+    "topics": [
+      "hardware",
+      "mechanical",
+      "open-hardware",
+      "case-study"
+    ],
     "level": "advanced",
     "language": "zh-CN",
     "description": "立创开源硬件上的第20届平衡轮腿组国二项目，公开整车硬件方案描述并记录FOC驱动与分线板等实践问题。",
@@ -394,7 +304,12 @@
       "platform": "oshwhub",
       "author": "photoelectric-giant"
     },
-    "tags": ["国二方案", "开源硬件", "TC264", "FOC"],
+    "tags": [
+      "国二方案",
+      "开源硬件",
+      "TC264",
+      "FOC"
+    ],
     "featured": true,
     "createdAt": "2026-06-06",
     "updatedAt": "2026-06-06"
@@ -404,9 +319,16 @@
     "title": "第二十届全国大学生智能汽车竞赛总决赛英飞凌平衡轮腿组现场采访",
     "url": "https://blog.csdn.net/zhuoqingjoking97298/article/details/152090858",
     "year": "2025",
-    "groups": ["balance-wheel-leg"],
+    "groups": [
+      "balance-wheel-leg"
+    ],
     "type": "csdn",
-    "topics": ["case-study", "control", "hardware", "mechanical"],
+    "topics": [
+      "case-study",
+      "control",
+      "hardware",
+      "mechanical"
+    ],
     "level": "intermediate",
     "language": "zh-CN",
     "description": "第20届总决赛平衡轮腿组现场采访整理，汇总多支队伍的MCU选型、控制方案、单边桥与跳跃难点经验。",
@@ -414,7 +336,12 @@
       "platform": "csdn",
       "author": "卓晴"
     },
-    "tags": ["总决赛采访", "经验复盘", "TC264", "控制方案"],
+    "tags": [
+      "总决赛采访",
+      "经验复盘",
+      "TC264",
+      "控制方案"
+    ],
     "featured": true,
     "createdAt": "2026-06-06",
     "updatedAt": "2026-06-06"

@@ -66,14 +66,21 @@ function validateUniqueArray(values, label, errors, location) {
 
 function parseResourceShardPath(filePath) {
   const normalized = filePath.replace(/\\/g, "/");
-  const match = normalized.match(/^data\/resources\/([0-9]{4})\/([a-z0-9-]+)\/resources\.json$/);
-  if (!match) {
+  const yearMatch = normalized.match(/^data\/resources\/([0-9]{4})\/resources\.json$/);
+  if (yearMatch) {
+    return {
+      year: yearMatch[1]
+    };
+  }
+
+  const groupMatch = normalized.match(/^data\/resources\/([0-9]{4})\/([a-z0-9-]+)\/resources\.json$/);
+  if (!groupMatch) {
     return null;
   }
 
   return {
-    year: match[1],
-    group: match[2]
+    year: groupMatch[1],
+    group: groupMatch[2]
   };
 }
 
@@ -191,7 +198,7 @@ function readResourceFiles(errors) {
 
       const shard = parseResourceShardPath(file);
       if (!shard) {
-        errors.push(`资源分片路径不符合 data/resources/{year}/{group}/resources.json：${file}`);
+        errors.push(`资源分片路径不符合 data/resources/{year}/resources.json 或 data/resources/{year}/{group}/resources.json：${file}`);
       }
 
       const absolutePath = path.join(rootDir, file);

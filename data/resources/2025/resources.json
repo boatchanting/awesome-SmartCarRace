@@ -1,0 +1,357 @@
+[
+  {
+    "id": "2025-common-official-rules",
+    "title": "第二十届全国大学生智能汽车竞速比赛规则",
+    "url": "https://blog.csdn.net/zhuoqingjoking97298/article/details/143673441",
+    "year": "2025",
+    "groups": [
+      "common",
+      "camera",
+      "electromagnetic",
+      "vision",
+      "outdoor",
+      "ai",
+      "balance-wheel-leg"
+    ],
+    "type": "official",
+    "topics": [
+      "rules"
+    ],
+    "level": "beginner",
+    "language": "zh-CN",
+    "description": "第二十届智能车竞速赛总规则，包含平衡轮腿组的赛题任务、车模平台、主控要求、赛道元素和竞赛组织说明。",
+    "source": {
+      "platform": "csdn",
+      "author": "卓晴"
+    },
+    "tags": [
+      "第20届",
+      "竞赛规则",
+      "平衡轮腿",
+      "官方规则"
+    ],
+    "featured": true,
+    "createdAt": "2026-06-06",
+    "updatedAt": "2026-06-06"
+  },
+  {
+    "id": "2025-common-car-platform",
+    "title": "第二十届全国大学生智能汽车竞赛车模平台",
+    "url": "https://www.eet-china.com/mp/a364181.html",
+    "year": "2025",
+    "groups": [
+      "common",
+      "camera",
+      "electromagnetic",
+      "vision",
+      "outdoor",
+      "ai",
+      "balance-wheel-leg"
+    ],
+    "type": "official",
+    "topics": [
+      "mechanical",
+      "rules"
+    ],
+    "level": "beginner",
+    "language": "zh-CN",
+    "description": "组委会发布的第20届车模平台说明，覆盖轮腿等指定车模平台、供应商信息和允许改装范围。",
+    "source": {
+      "platform": "eet-china",
+      "author": "TsinghuaJoking"
+    },
+    "tags": [
+      "车模平台",
+      "轮腿车模",
+      "机械结构",
+      "第20届"
+    ],
+    "featured": true,
+    "createdAt": "2026-06-06",
+    "updatedAt": "2026-06-06"
+  },
+  {
+    "id": "2025-common-infineon-chip-support",
+    "title": "第20届全国大学生智能汽车竞赛英飞凌芯片支持计划",
+    "url": "https://community.infineon.com/t5/%E6%8A%80%E6%9C%AF%E7%A4%BE%E5%8C%BA%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/%E7%AC%AC20%E5%B1%8A%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%99%BA%E8%83%BD%E6%B1%BD%E8%BD%A6%E7%AB%9E%E8%B5%9B-%E8%8B%B1%E9%A3%9E%E5%87%8C%E8%8A%AF%E7%89%87%E6%94%AF%E6%8C%81%E8%AE%A1%E5%88%92/ba-p/924164",
+    "year": "2025",
+    "groups": [
+      "common",
+      "camera",
+      "electromagnetic",
+      "vision",
+      "outdoor",
+      "ai",
+      "balance-wheel-leg"
+    ],
+    "type": "official",
+    "topics": [
+      "hardware",
+      "embedded",
+      "rules"
+    ],
+    "level": "beginner",
+    "language": "zh-CN",
+    "description": "英飞凌官方社区发布的第20届芯片支持计划，说明AURIX TC264、TRAVEO CYT2BL3等器件申请与使用范围。",
+    "source": {
+      "platform": "infineon-community",
+      "author": "Infineon Developer Community"
+    },
+    "tags": [
+      "英飞凌",
+      "TC264",
+      "CYT2BL3",
+      "芯片支持"
+    ],
+    "featured": true,
+    "createdAt": "2026-06-06",
+    "updatedAt": "2026-06-06"
+  },
+  {
+    "id": "2025-common-st-chip-support",
+    "title": "第20届全国大学生智能汽车竞赛意法半导体芯片支持计划",
+    "url": "https://blog.csdn.net/zhuoqingjoking97298/article/details/145804537",
+    "year": "2025",
+    "groups": [
+      "common",
+      "balance-wheel-leg"
+    ],
+    "type": "official",
+    "topics": [
+      "hardware",
+      "embedded",
+      "rules"
+    ],
+    "level": "beginner",
+    "language": "zh-CN",
+    "description": "第20届ST芯片支持计划，说明推荐平衡轮腿组等使用的ToF传感器型号和样片申请流程。",
+    "source": {
+      "platform": "csdn",
+      "author": "卓晴"
+    },
+    "tags": [
+      "ST",
+      "ToF",
+      "传感器",
+      "VL53L1CX"
+    ],
+    "featured": false,
+    "createdAt": "2026-06-06",
+    "updatedAt": "2026-06-06"
+  },
+  {
+    "id": "2025-common-referee-handbook",
+    "title": "第二十届全国大学生智能汽车竞赛裁判员手册",
+    "url": "https://www.eet-china.com/mp/a417379.html",
+    "year": "2025",
+    "groups": [
+      "common",
+      "camera",
+      "electromagnetic",
+      "vision",
+      "outdoor",
+      "ai",
+      "balance-wheel-leg"
+    ],
+    "type": "official",
+    "topics": [
+      "rules",
+      "case-study"
+    ],
+    "level": "intermediate",
+    "language": "zh-CN",
+    "description": "面向现场裁判和参赛队公开的第20届裁判员手册，适合核对比赛流程、判罚标准、车模检查与现场执行口径。",
+    "source": {
+      "platform": "eet-china",
+      "author": "TsinghuaJoking"
+    },
+    "tags": [
+      "裁判员手册",
+      "比赛流程",
+      "判罚标准",
+      "车检"
+    ],
+    "featured": false,
+    "createdAt": "2026-06-06",
+    "updatedAt": "2026-06-06"
+  },
+  {
+    "id": "2025-common-finals-track-design",
+    "title": "第二十届全国大学生智能汽车竞赛全国总决赛赛道设计",
+    "url": "https://blog.csdn.net/zhuoqingjoking97298/article/details/150069858",
+    "year": "2025",
+    "groups": [
+      "common",
+      "camera",
+      "electromagnetic",
+      "vision",
+      "outdoor",
+      "ai",
+      "balance-wheel-leg"
+    ],
+    "type": "official",
+    "topics": [
+      "rules",
+      "mechanical",
+      "case-study"
+    ],
+    "level": "intermediate",
+    "language": "zh-CN",
+    "description": "第20届全国总决赛赛道设计文档，包含平衡轮腿赛道预赛和决赛布置示意，适合复盘赛道元素与调试场景。",
+    "source": {
+      "platform": "csdn",
+      "author": "卓晴"
+    },
+    "tags": [
+      "总决赛",
+      "赛道设计",
+      "预赛赛道",
+      "决赛赛道"
+    ],
+    "featured": true,
+    "createdAt": "2026-06-06",
+    "updatedAt": "2026-06-06"
+  },
+  {
+    "id": "2025-common-tech-report-requirements",
+    "title": "第二十届全国大学生智能汽车竞赛技术报告要求细则",
+    "url": "https://www.eet-china.com/mp/a426507.html",
+    "year": "2025",
+    "groups": [
+      "common",
+      "camera",
+      "electromagnetic",
+      "vision",
+      "outdoor",
+      "ai",
+      "balance-wheel-leg"
+    ],
+    "type": "official",
+    "topics": [
+      "rules",
+      "case-study"
+    ],
+    "level": "beginner",
+    "language": "zh-CN",
+    "description": "第20届总决赛技术报告写作与评审要求，适合准备平衡轮腿组报告结构、技术方案描述和研究论文部分。",
+    "source": {
+      "platform": "eet-china",
+      "author": "TsinghuaJoking"
+    },
+    "tags": [
+      "技术报告",
+      "报告要求",
+      "总决赛",
+      "论文集"
+    ],
+    "featured": false,
+    "createdAt": "2026-06-06",
+    "updatedAt": "2026-06-06"
+  },
+  {
+    "id": "2025-common-awards-list",
+    "title": "第二十届全国大学生智能汽车竞赛全国总决赛获奖名单",
+    "url": "https://blog.csdn.net/zhuoqingjoking97298/article/details/150608374",
+    "year": "2025",
+    "groups": [
+      "common",
+      "camera",
+      "electromagnetic",
+      "vision",
+      "outdoor",
+      "ai",
+      "balance-wheel-leg"
+    ],
+    "type": "official",
+    "topics": [
+      "case-study",
+      "rules"
+    ],
+    "level": "beginner",
+    "language": "zh-CN",
+    "description": "第20届全国总决赛获奖名单，包含平衡轮腿组获奖队伍和成绩信息，适合定位优秀队伍与赛后复盘。",
+    "source": {
+      "platform": "csdn",
+      "author": "卓晴"
+    },
+    "tags": [
+      "获奖名单",
+      "全国总决赛",
+      "平衡轮腿",
+      "成绩复盘"
+    ],
+    "featured": false,
+    "createdAt": "2026-06-06",
+    "updatedAt": "2026-06-06"
+  },
+  {
+    "id": "2025-common-tech-report-collection",
+    "title": "第二十届全国大学生智能汽车竞赛技术报告合集",
+    "url": "https://blog.csdn.net/zhuoqingjoking97298/article/details/151355375",
+    "year": "2025",
+    "groups": [
+      "common",
+      "camera",
+      "electromagnetic",
+      "vision",
+      "outdoor",
+      "ai",
+      "balance-wheel-leg"
+    ],
+    "type": "dataset",
+    "topics": [
+      "case-study",
+      "control",
+      "mechanical",
+      "hardware"
+    ],
+    "level": "advanced",
+    "language": "zh-CN",
+    "description": "第20届智能车竞赛技术报告汇总页，列出平衡轮腿等组别报告资源入口，适合赛后学习优秀队伍方案。",
+    "source": {
+      "platform": "csdn",
+      "author": "卓晴"
+    },
+    "tags": [
+      "技术报告",
+      "报告合集",
+      "优秀方案",
+      "赛后资料"
+    ],
+    "featured": true,
+    "createdAt": "2026-06-06",
+    "updatedAt": "2026-06-06"
+  },
+  {
+    "id": "2025-common-seekfree-demo-index",
+    "title": "逐飞科技第二十届智能车演示车模索引",
+    "url": "https://seekfree.com.cn/%E5%BE%AE%E4%BF%A1%E6%8E%A8%E6%96%87/%E6%BC%94%E7%A4%BA%E8%BD%A6%E6%A8%A1/",
+    "year": "2025",
+    "groups": [
+      "common",
+      "balance-wheel-leg"
+    ],
+    "type": "article",
+    "topics": [
+      "case-study",
+      "control",
+      "mechanical"
+    ],
+    "level": "beginner",
+    "language": "zh-CN",
+    "description": "逐飞科技整理的演示车模索引页，集中收录第20届平衡轮腿组前期验证和演示车模浅析入口。",
+    "source": {
+      "platform": "seekfree",
+      "author": "逐飞科技"
+    },
+    "tags": [
+      "资源索引",
+      "演示车模",
+      "逐飞科技",
+      "第二十届"
+    ],
+    "featured": false,
+    "createdAt": "2026-06-06",
+    "updatedAt": "2026-06-06"
+  }
+]
