@@ -139,10 +139,11 @@
       typographer: true,
       breaks: false,
       highlight(code, language) {
-        const validLanguage = language && hljs.getLanguage(language) ? language : "plaintext";
-        const highlighted = validLanguage === "plaintext"
+        const syntaxHighlighter = typeof hljs !== "undefined" ? hljs : null;
+        const validLanguage = syntaxHighlighter && language && syntaxHighlighter.getLanguage(language) ? language : "plaintext";
+        const highlighted = validLanguage === "plaintext" || !syntaxHighlighter
           ? escapeHtml(code)
-          : hljs.highlight(code, { language: validLanguage, ignoreIllegals: true }).value;
+          : syntaxHighlighter.highlight(code, { language: validLanguage, ignoreIllegals: true }).value;
         return `<pre class="code-block" data-language="${escapeHtml(validLanguage)}"><button class="copy-code" type="button">复制</button><code class="hljs language-${escapeHtml(validLanguage)}">${highlighted}</code></pre>`;
       }
     });
@@ -330,6 +331,23 @@
     return ["127.0.0.1", "localhost", "::1"].includes(window.location.hostname);
   }
 
+  function buildDocMetaMarkup(doc) {
+    return [
+      `📄 ${doc.stats.words.toLocaleString("zh-CN")} 字`,
+      `⏱ ${doc.stats.readTime} 分钟`,
+      `🗓 创建 ${escapeHtml(formatDate(doc.stats.created))}`,
+      `🕒 更新 ${escapeHtml(formatDate(doc.stats.updated || doc.stats.created))}`,
+      `✍️ ${escapeHtml(doc.stats.author || "社区")}`
+    ].map((item) => `<span>${item}</span>`).join("");
+  }
+
+  function buildPagerMarkup(prev, next) {
+    return `
+      ${prev ? `<a class="pager-card" href="${buildDocHash(prev.path)}"><span>上一篇</span><strong>${escapeHtml(prev.title)}</strong></a>` : "<span></span>"}
+      ${next ? `<a class="pager-card next" href="${buildDocHash(next.path)}"><span>下一篇</span><strong>${escapeHtml(next.title)}</strong></a>` : "<span></span>"}
+    `;
+  }
+
   function titleToPinyinSeed(text) {
     // 轻量拼音搜索占位：不引入大词库时，保留中文、首字母和英文；可替换为 pinyin-pro CDN。
     return String(text).normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -505,6 +523,12 @@
     const doc = state.docsByPath.get(decodeURI(path)) || state.docs[0];
     if (!doc) return;
     state.activeDoc = doc;
+    state.headings = [];
+    els.docContent.replaceChildren();
+    els.docTags.replaceChildren();
+    els.docPager.replaceChildren();
+    els.toc.innerHTML = `<span class="toc-empty">本文暂无目录</span>`;
+    updateActiveTree(path);
 
     els.docTitle.textContent = doc.title;
     els.docCategory.textContent = doc.stats.category;
@@ -516,16 +540,57 @@
       <span>🕒 更新 ${escapeHtml(formatDate(doc.stats.updated || doc.stats.created))}</span>
       <span>✍️ ${escapeHtml(doc.stats.author || "社区")}</span>
     `;
+    els.docMeta.innerHTML = buildDocMetaMarkup(doc);
     els.docTags.innerHTML = doc.stats.tags.map((tag) => `<a class="pill" href="#/search/${encodeURIComponent(tag)}">#${escapeHtml(tag)}</a>`).join("");
     els.editLink.href = `https://github.com/${config.githubRepo}/edit/${config.githubBranch}/${encodeURI(doc.path)}`;
     renderBreadcrumbs(doc);
 
-    const html = md.render(doc.body || doc.markdown);
-    els.docContent.innerHTML = html;
-    enhanceRenderedMarkdown();
-    renderPager(doc);
+    try {
+      const html = md.render(doc.body || doc.markdown);
+      els.docContent.innerHTML = html;
+      enhanceRenderedMarkdown();
+      renderPager(doc);
+      scrollToDocAnchor(anchor);
+    } catch (error) {
+      console.error("Failed to render document", doc.path, error);
+      els.docContent.innerHTML = `<div class="state-message">当前文档渲染失败：${escapeHtml(error.message || String(error))}</div>`;
+      return;
+      els.docContent.innerHTML = `<div class="state-message">当前文档渲染失败：${escapeHtml(error.message || String(error))}</div>`;
+    }
+  }
+
+  function renderResolvedDoc(path, anchor = "") {
+    const doc = state.docsByPath.get(decodeURI(path)) || state.docs[0];
+    if (!doc) return;
+
+    state.activeDoc = doc;
+    state.headings = [];
+    els.docContent.replaceChildren();
+    els.docTags.replaceChildren();
+    els.docPager.replaceChildren();
+    els.toc.innerHTML = `<span class="toc-empty">本文暂无目录</span>`;
     updateActiveTree(path);
-    scrollToDocAnchor(anchor);
+
+    els.docTitle.textContent = doc.title;
+    els.docCategory.textContent = doc.stats.category;
+    els.docSummary.textContent = doc.summary;
+    els.docMeta.innerHTML = buildDocMetaMarkup(doc);
+    els.docTags.innerHTML = doc.stats.tags
+      .map((tag) => `<a class="pill" href="#/search/${encodeURIComponent(tag)}">#${escapeHtml(tag)}</a>`)
+      .join("");
+    els.editLink.href = `https://github.com/${config.githubRepo}/edit/${config.githubBranch}/${encodeURI(doc.path)}`;
+    renderBreadcrumbs(doc);
+
+    try {
+      const html = md.render(doc.body || doc.markdown);
+      els.docContent.innerHTML = html;
+      enhanceRenderedMarkdown();
+      renderPager(doc);
+      scrollToDocAnchor(anchor);
+    } catch (error) {
+      console.error("Failed to render document", doc.path, error);
+      els.docContent.innerHTML = `<div class="state-message">当前文档渲染失败：${escapeHtml(error.message || String(error))}</div>`;
+    }
   }
 
   function enhanceRenderedMarkdown() {
@@ -621,6 +686,8 @@
     const index = state.docs.findIndex((item) => item.path === doc.path);
     const prev = state.docs[index - 1];
     const next = state.docs[index + 1];
+    els.docPager.innerHTML = buildPagerMarkup(prev, next);
+    return;
     els.docPager.innerHTML = `
       ${prev ? `<a class="pager-card" href="${buildDocHash(prev.path)}"><span>上一篇</span><strong>${escapeHtml(prev.title)}</strong></a>` : "<span></span>"}
       ${next ? `<a class="pager-card next" href="${buildDocHash(next.path)}"><span>下一篇</span><strong>${escapeHtml(next.title)}</strong></a>` : "<span></span>"}
@@ -705,7 +772,7 @@
     const docRoute = parseDocRoute(hash);
     if (docRoute) {
       showView("doc");
-      renderDoc(docRoute.path, docRoute.anchor);
+      renderResolvedDoc(docRoute.path, docRoute.anchor);
       return;
     }
     showView("home");
